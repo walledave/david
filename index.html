@@ -14,6 +14,27 @@
 </head>
 <body>
 
+<!-- Beim Scrollen rollt ein Ball über den unteren Bildschirmrand auf
+     Loch 18 zu und fällt am Ende der Seite ein. Rein dekorativ, ohne
+     JavaScript: die Animation hängt direkt am Scrollfortschritt. -->
+<div class="putt" aria-hidden="true">
+  <span class="putt-flag">
+    <svg viewBox="0 0 56 96" width="56" height="96" role="presentation" focusable="false">
+      <ellipse cx="20" cy="88" rx="15" ry="5" fill="#0a1d12" opacity=".55"/>
+      <ellipse cx="20" cy="86" rx="11" ry="3.6" fill="#09150d"/>
+      <ellipse cx="20" cy="85" rx="11" ry="3.6" fill="none" stroke="#e9e1cb" stroke-width="1" opacity=".5"/>
+      <path d="M20 86V10" stroke="#f4efe2" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M20 86V10" stroke="#0a1d12" stroke-width=".8" stroke-dasharray="9 9" opacity=".35"/>
+      <path d="M20 11h30l-8 10 8 10H20z" fill="#8f2f28"/>
+      <path d="M20 11h30l-8 10 8 10H20z" fill="none" stroke="#5d1c17" stroke-width=".9"/>
+      <text x="31" y="25" font-family="Inter, sans-serif" font-size="11" font-weight="700"
+            fill="#f7f1e2" text-anchor="middle">18</text>
+    </svg>
+  </span>
+  <span class="putt-line"></span>
+  <span class="putt-ball ball"></span>
+</div>
+
 <!-- Einmalige Begrüßung: beim Öffnen der Seite fallen Bälle herein,
      springen einmal auf und verschwinden wieder. Rein dekorativ. -->
 <div class="drop" aria-hidden="true">
@@ -71,17 +92,147 @@
     </div>
   </div>
 
-  <!-- Schottische Hügel und Fairway als ruhige Silhouette -->
+  <!-- Golfplatz in der Abenddämmerung: Himmel mit tiefstehender Sonne,
+       dunstige Hügelketten, Baumreihe, Horizontnebel, perspektivisch
+       zulaufende Mähbahnen, Bunker und das Grün mit Fahne. Reines SVG
+       plus eine kleine Rauschkachel – kein einziges Foto. -->
   <div class="hero-scene" aria-hidden="true">
-    <svg viewBox="0 0 1440 220" preserveAspectRatio="none" role="presentation" focusable="false">
-      <path class="hill hill-far"  d="M0 150 C 180 92, 300 132, 470 110 C 640 88, 760 128, 940 104 C 1120 80, 1290 126, 1440 100 L1440 220 L0 220 Z"/>
-      <path class="hill hill-mid"  d="M0 176 C 210 130, 380 168, 560 148 C 740 128, 900 170, 1090 148 C 1250 130, 1350 164, 1440 150 L1440 220 L0 220 Z"/>
-      <path class="hill hill-near" d="M0 202 C 240 172, 430 200, 640 186 C 850 172, 1040 202, 1240 188 C 1340 181, 1400 192, 1440 188 L1440 220 L0 220 Z"/>
-      <g class="hero-flag">
-        <path d="M1146 188V126" stroke="#f6f1e4" stroke-width="2.4" stroke-linecap="round"/>
-        <path d="M1146 128l30 9-30 9z" fill="#8f2f28"/>
+    <svg viewBox="0 0 1440 620" preserveAspectRatio="xMidYMax slice" role="presentation" focusable="false">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0"    stop-color="#06150e"/>
+          <stop offset=".3"   stop-color="#0c2517"/>
+          <stop offset=".62"  stop-color="#173a26"/>
+          <stop offset=".86"  stop-color="#2c5738"/>
+          <stop offset="1"    stop-color="#4a7248"/>
+        </linearGradient>
+        <radialGradient id="sun" cx=".66" cy=".49" r=".42">
+          <stop offset="0"   stop-color="#f0dca6" stop-opacity=".62"/>
+          <stop offset=".28" stop-color="#cbb478" stop-opacity=".3"/>
+          <stop offset="1"   stop-color="#cbb478" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#2c5a42"/><stop offset="1" stop-color="#436c4c"/>
+        </linearGradient>
+        <linearGradient id="hillMid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1b4029"/><stop offset="1" stop-color="#2a5634"/>
+        </linearGradient>
+        <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0"   stop-color="#cfe0c4" stop-opacity="0"/>
+          <stop offset=".45" stop-color="#cfe0c4" stop-opacity=".34"/>
+          <stop offset="1"   stop-color="#cfe0c4" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0"   stop-color="#091d12" stop-opacity="0"/>
+          <stop offset=".55" stop-color="#091d12" stop-opacity=".3"/>
+          <stop offset="1"   stop-color="#091d12" stop-opacity=".82"/>
+        </linearGradient>
+        <radialGradient id="spot" cx=".78" cy=".62" r=".5">
+          <stop offset="0" stop-color="#8fc08f" stop-opacity=".2"/>
+          <stop offset="1" stop-color="#8fc08f" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="vignette" cx=".5" cy=".4" r=".82">
+          <stop offset=".45" stop-color="#000" stop-opacity="0"/>
+          <stop offset="1"   stop-color="#000" stop-opacity=".48"/>
+        </radialGradient>
+        <radialGradient id="sandG" cx=".42" cy=".3" r=".8">
+          <stop offset="0" stop-color="#f3e9cd"/><stop offset="1" stop-color="#c9b485"/>
+        </radialGradient>
+        <filter id="soft"><feGaussianBlur stdDeviation="3"/></filter>
+        <filter id="softer"><feGaussianBlur stdDeviation="7"/></filter>
+        <filter id="mistBlur"><feGaussianBlur stdDeviation="9"/></filter>
+      </defs>
+
+      <rect width="1440" height="620" fill="url(#sky)"/>
+      <rect width="1440" height="620" fill="url(#sun)"/>
+
+      <!-- Luftperspektive: hinten heller, weicher, flacher -->
+      <g filter="url(#softer)" opacity=".5">
+        <path d="M0 232 C 160 178, 316 208, 470 194 C 628 180, 748 212, 908 192
+                 C 1064 172, 1268 210, 1440 186 L1440 302 L0 302 Z" fill="url(#hillFar)"/>
       </g>
+      <g filter="url(#soft)" opacity=".72">
+        <path d="M0 258 C 196 216, 352 250, 534 238 C 716 226, 866 258, 1052 240
+                 C 1222 224, 1342 252, 1440 242 L1440 306 L0 306 Z" fill="url(#hillMid)"/>
+      </g>
+
+      <!-- Baumreihe, unscharf wie eine echte Ferne -->
+      <g opacity=".9" filter="url(#soft)">
+        <path d="M0 282 q10-14 20-4 q9-16 19-3 q11-18 21-2 q8-13 18-3 q12-19 22-3
+                 q9-15 19-2 q11-17 21-3 q8-12 18-2 q12-18 22-3 q10-16 20-2 q11-17 21-3
+                 q9-13 19-2 q12-19 22-3 q10-15 20-2 q11-18 21-3 q8-12 18-2 q12-17 22-3
+                 q10-16 20-2 q11-18 21-2 q9-13 19-3 q12-18 22-2 q10-15 20-3 q11-17 21-2
+                 q8-13 18-3 q12-18 22-2 q10-16 20-3 q11-17 21-2 q9-12 19-3 q12-19 22-2
+                 q10-15 20-3 q11-17 21-2 q8-13 18-2 q12-18 22-3 q10-16 20-2 q11-17 21-3
+                 q9-12 19-2 q12-18 22-3 q10-15 20-2 q11-18 21-3 q8-12 18-2 q12-17 22-3
+                 q10-16 20-2 q11-18 21-2 q9-13 19-3 q12-18 22-2 q10-15 20-3 q11-17 21-2
+                 q8-13 18-3 q12-18 22-2 q10-16 20-3 q11-17 21-2 q9-12 19-3 q12-19 22-2
+                 q10-15 20-3 q11-17 21-2 q8-13 18-2 q12-18 22-3 q10-16 20-2 q11-17 21-3
+                 L1440 310 L0 310 Z" fill="#0e2c1d"/>
+      </g>
+
+      <!-- Fairway -->
+      <g>
+        <polygon points="760,300 -1400,620 -1170,620" fill="#2d6b44"/>
+        <polygon points="760,300 -1170,620 -940,620" fill="#245839"/>
+        <polygon points="760,300 -940,620 -710,620" fill="#2d6b44"/>
+        <polygon points="760,300 -710,620 -480,620" fill="#245839"/>
+        <polygon points="760,300 -480,620 -250,620" fill="#2d6b44"/>
+        <polygon points="760,300 -250,620 -20,620" fill="#245839"/>
+        <polygon points="760,300 -20,620 210,620" fill="#2d6b44"/>
+        <polygon points="760,300 210,620 440,620" fill="#245839"/>
+        <polygon points="760,300 440,620 670,620" fill="#2d6b44"/>
+        <polygon points="760,300 670,620 900,620" fill="#245839"/>
+        <polygon points="760,300 900,620 1130,620" fill="#2d6b44"/>
+        <polygon points="760,300 1130,620 1360,620" fill="#245839"/>
+        <polygon points="760,300 1360,620 1590,620" fill="#2d6b44"/>
+        <polygon points="760,300 1590,620 1820,620" fill="#245839"/>
+        <polygon points="760,300 1820,620 2050,620" fill="#2d6b44"/>
+        <polygon points="760,300 2050,620 2280,620" fill="#245839"/>
+        <polygon points="760,300 2280,620 2510,620" fill="#2d6b44"/>
+        <polygon points="760,300 2510,620 2740,620" fill="#245839"/>
+        <polygon points="760,300 2740,620 2850,620" fill="#2d6b44"/>
+      </g>
+
+      <linearGradient id="flat" x1="0" y1="0" x2="0" y2="1" gradientUnits="userSpaceOnUse"
+                      y1="300" y2="470">
+        <stop offset="0"   stop-color="#28603e" stop-opacity=".92"/>
+        <stop offset=".55" stop-color="#28603e" stop-opacity=".42"/>
+        <stop offset="1"   stop-color="#28603e" stop-opacity="0"/>
+      </linearGradient>
+      <rect x="0" y="300" width="1440" height="170" fill="url(#flat)"/>
+
+      <!-- Bodennebel über der Ferne: verdeckt den Fluchtpunkt und trennt
+           Platz von Horizont, wie an einem feuchten Abend. -->
+      <rect x="-40" y="266" width="1520" height="86" fill="url(#mist)" filter="url(#mistBlur)"/>
+
+      <!-- Bunker: Schattenrand, Sandfläche, heller Grat -->
+      <g>
+        <ellipse cx="292" cy="452" rx="146" ry="32" fill="#0f2a19" opacity=".6" filter="url(#soft)"/>
+        <ellipse cx="294" cy="445" rx="132" ry="25" fill="#1a3c26"/>
+        <ellipse cx="296" cy="442" rx="124" ry="21" fill="url(#sandG)" opacity=".78"/>
+        <ellipse cx="298" cy="436" rx="96" ry="12" fill="#efe4c6" opacity=".3"/>
+        <path d="M172 441 a124 21 0 0 1 248 0" fill="none" stroke="#0f2a19"
+              stroke-width="3" opacity=".45" filter="url(#soft)"/>
+      </g>
+
+      <!-- Grün mit Fahne und Loch -->
+      <g class="hero-flag">
+        <ellipse cx="1136" cy="420" rx="196" ry="44" fill="#337a4b" opacity=".5" filter="url(#soft)"/>
+        <ellipse cx="1136" cy="416" rx="160" ry="34" fill="#3a8a55" opacity=".45"/>
+        <ellipse cx="1136" cy="414" rx="10" ry="4" fill="#08170e"/>
+        <path d="M1136 414V300" stroke="#f7f3e8" stroke-width="3" stroke-linecap="round"/>
+        <path d="M1136 302l38 11-38 11z" fill="#8f2f28" stroke="#5d1c17" stroke-width=".9"/>
+      </g>
+
+      <rect width="1440" height="620" fill="url(#spot)"/>
+      <rect y="330" width="1440" height="290" fill="url(#fade)"/>
+      <rect width="1440" height="620" fill="url(#vignette)"/>
     </svg>
+
+    <!-- Grasnarbe und Filmkorn: eine 180px-Kachel aus fraktalem Rausch,
+         multipliziert über die Szene. Kostet ein paar hundert Byte. -->
+    <span class="hero-grain"></span>
   </div>
 
   <div class="tartan-band" aria-hidden="true"></div>

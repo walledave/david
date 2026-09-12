@@ -112,7 +112,7 @@ img { max-width: 100%; }
   width: 100%;
   max-width: var(--wrap);
   margin: 0 auto;
-  padding: 0 var(--gutter);
+  padding-inline: var(--gutter);
 }
 
 /* ---------- 3. Tartan --------------------------------------- */
@@ -304,7 +304,8 @@ img { max-width: 100%; }
 main {
   position: relative;
   z-index: 1;
-  padding: clamp(30px, 5vw, 52px) 0 clamp(44px, 7vw, 76px);
+  /* Blockabstände getrennt setzen: .wrap steuert nur die Seitenränder */
+  padding-block: clamp(34px, 5vw, 56px) clamp(44px, 7vw, 76px);
 }
 
 /* Eingeblendet wird nur, wenn JavaScript läuft – sonst ist alles sofort da */
@@ -671,13 +672,174 @@ input[type="password"]:focus {
   font-size: 1.02rem;
 }
 
-/* ---------- 11. Übersicht (Scorecard) ----------------------- */
+/* ---------- 11. Wunschliste: Zeilen untereinander ----------- */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.wish {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) auto;
+  gap: 12px 22px;
+  align-items: center;
+  padding: 16px 20px;
+  border: 1px solid var(--sand-line);
+  border-radius: var(--r-lg);
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease;
+}
+
+.wish:hover {
+  transform: translateY(-2px);
+  border-color: var(--sand-deep);
+  box-shadow: var(--shadow-md);
+}
+
+.wish:focus-within {
+  border-color: var(--fairway-soft);
+  box-shadow: var(--shadow-md);
+}
+
+.thumb {
+  grid-row: 1;
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  padding: 7px;
+  border: 1px solid var(--sand-line);
+  border-radius: var(--r-md);
+  background: #fbf8f0;
+  transition: transform .3s ease;
+}
+
+.wish:hover .thumb { transform: scale(1.03); }
+
+/* Ohne Produktbild steht an gleicher Stelle ein Fairway-Feld mit Golfball,
+   damit alle Zeilen sauber in einer Flucht bleiben. */
+.wish.no-image::before {
+  content: "";
+  grid-row: 1;
+  width: 96px;
+  height: 96px;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(20, 48, 31, .25);
+  background-color: #1e563a;
+  background-image:
+    radial-gradient(circle 11px at 50% 50%, rgba(253, 251, 245, .95) 98%, rgba(0, 0, 0, 0) 100%),
+    repeating-linear-gradient(112deg,
+      rgba(255, 255, 255, .06) 0px, rgba(255, 255, 255, .06) 16px,
+      rgba(0, 0, 0, 0) 16px, rgba(0, 0, 0, 0) 32px);
+}
+
+.wish-body { min-width: 0; }
+
+.wish-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--pine);
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+}
+
+.wish-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px 10px;
+  margin: 9px 0 0;
+  font-size: .87rem;
+}
+
+.price {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 11px;
+  border-radius: var(--r-pill);
+  background: rgba(31, 92, 58, .1);
+  color: var(--fairway-dark);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .01em;
+}
+
+.wish-meta a {
+  color: var(--thistle);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(52, 97, 127, .35);
+  padding-bottom: 1px;
+  overflow-wrap: anywhere;
+  transition: color .15s ease, border-color .15s ease;
+}
+
+.wish-meta a:hover {
+  color: var(--claret);
+  border-bottom-color: var(--claret);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  background: rgba(143, 47, 40, .1);
+  border: 1px solid rgba(143, 47, 40, .26);
+  color: var(--claret);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.wish-note {
+  margin: 9px 0 0;
+  padding: 2px 0 2px 12px;
+  border-left: 3px solid var(--sand-deep);
+  color: var(--ink-soft);
+  font-size: .88rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.wish-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  min-width: 190px;
+}
+
+.admin-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+/* vergebene Wünsche treten zurück, bleiben aber gut lesbar */
+.wish.taken {
+  background: #f6f2e8;
+  border-color: var(--sand-deep);
+  box-shadow: none;
+}
+
+.wish.taken:hover { transform: none; box-shadow: var(--shadow-sm); }
+
+.wish.taken .thumb { opacity: .65; }
+
+.wish.taken .wish-title { color: var(--ink-soft); }
+
+/* ---------- 12. Übersicht (Scorecard) unter der Liste ------- */
 
 .summary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(10px, 1.6vw, 16px);
-  margin: 0 0 18px;
+  margin: clamp(26px, 4vw, 40px) 0 0;
 }
 
 .stat {
@@ -724,12 +886,12 @@ input[type="password"]:focus {
   color: var(--ink-faint);
 }
 
-/* ---------- 12. Werkzeugleiste ------------------------------ */
+/* ---------- 13. Schalter unter der Übersicht ---------------- */
 
 .toolbar {
   display: flex;
-  justify-content: flex-end;
-  margin: 0 0 22px;
+  justify-content: center;
+  margin: 14px 0 0;
 }
 
 .switch {
@@ -782,170 +944,11 @@ input[type="password"]:focus {
   box-shadow: inset 0 1px 3px rgba(20, 48, 31, .2), var(--ring);
 }
 
-/* ---------- 13. Wunschkarten -------------------------------- */
-
-.list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: clamp(16px, 2.4vw, 24px);
-  align-items: stretch;
-}
-
-.wish {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--sand-line);
-  border-radius: var(--r-lg);
-  background: var(--paper);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-  transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease;
-}
-
-.wish:hover {
-  transform: translateY(-3px);
-  border-color: var(--sand-deep);
-  box-shadow: var(--shadow-lg);
-}
-
-.wish:focus-within {
-  border-color: var(--fairway-soft);
-  box-shadow: var(--shadow-md);
-}
-
-.thumb {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: contain;
-  padding: 14px;
-  background: #fbf8f0;
-  border-bottom: 1px solid var(--sand-line);
-}
-
-/* Karten ohne Bild bekommen eine dezente Clubhaus-Kante */
-.wish.no-image::before {
-  content: "";
-  display: block;
-  height: 56px;
-  background-color: #1e563a;
-  background-image:
-    radial-gradient(circle 9px at 50% 50%, rgba(253, 251, 245, .95) 98%, rgba(0, 0, 0, 0) 100%),
-    repeating-linear-gradient(112deg,
-      rgba(255, 255, 255, .06) 0px, rgba(255, 255, 255, .06) 22px,
-      rgba(0, 0, 0, 0) 22px, rgba(0, 0, 0, 0) 44px);
-  border-bottom: 1px solid rgba(20, 48, 31, .2);
-}
-
-.wish-body {
-  flex: 1 1 auto;
-  padding: 18px 20px 6px;
-}
-
-.wish-title {
-  margin: 0;
-  font-size: 1.18rem;
-  font-weight: 600;
-  line-height: 1.3;
-  color: var(--pine);
-  text-wrap: pretty;
-}
-
-.wish-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 10px;
-  margin: 12px 0 0;
-  font-size: .87rem;
-}
-
-.price {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 12px;
-  border-radius: var(--r-pill);
-  background: rgba(31, 92, 58, .1);
-  color: var(--fairway-dark);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: .01em;
-}
-
-.wish-meta a {
-  color: var(--thistle);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(52, 97, 127, .35);
-  padding-bottom: 1px;
-  transition: color .15s ease, border-color .15s ease;
-}
-
-.wish-meta a:hover {
-  color: var(--claret);
-  border-bottom-color: var(--claret);
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 11px;
-  border-radius: var(--r-pill);
-  background: rgba(143, 47, 40, .1);
-  border: 1px solid rgba(143, 47, 40, .26);
-  color: var(--claret);
-  font-size: .74rem;
-  font-weight: 600;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-
-.wish-note {
-  margin: 12px 0 0;
-  padding: 9px 13px;
-  border-left: 3px solid var(--sand-deep);
-  border-radius: 0 var(--r-sm) var(--r-sm) 0;
-  background: #faf6ec;
-  color: var(--ink-soft);
-  font-size: .89rem;
-  line-height: 1.5;
-}
-
-.wish-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: auto;
-  padding: 16px 20px 18px;
-}
-
-.wish-actions > .primary,
-.wish-actions > .ghost { width: 100%; }
-
-.admin-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding-top: 12px;
-  border-top: 1px dashed var(--sand-line);
-}
-
-/* vergebene Wünsche treten zurück, bleiben aber gut lesbar */
-.wish.taken {
-  background: #f6f2e8;
-  border-color: var(--sand-deep);
-}
-
-.wish.taken .thumb { opacity: .62; }
-
-.wish.taken .wish-title { color: var(--ink-soft); }
-
-.wish.taken:hover .thumb { opacity: .85; }
-
 /* ---------- 14. Reservieren / Aufheben ---------------------- */
 
 .wish-lock {
-  margin: 0 14px 16px;
+  grid-column: 1 / -1;
+  margin: 2px 0 0;
   padding: 14px 16px;
   border: 1px solid var(--sand-line);
   border-radius: var(--r-md);
@@ -968,7 +971,8 @@ input[type="password"]:focus {
 }
 
 .lock-line input {
-  flex: 1 1 140px;
+  flex: 1 1 160px;
+  max-width: 320px;
   min-width: 0;
   padding: 9px 12px;
   font-size: .92rem;
@@ -988,7 +992,7 @@ input[type="password"]:focus {
 /* ---------- 15. Platzhalter beim Laden ---------------------- */
 
 .skeleton {
-  height: 232px;
+  height: 130px;
   border: 1px solid var(--sand-line);
   border-radius: var(--r-lg);
   background: linear-gradient(100deg,
@@ -1107,6 +1111,26 @@ footer small {
 
 /* ---------- 18. Schmale Bildschirme ------------------------- */
 
+@media (max-width: 860px) {
+  /* Aktionen rutschen unter Bild und Text, statt die Zeile zu quetschen */
+  .wish { grid-template-columns: 84px minmax(0, 1fr); }
+
+  .thumb, .wish.no-image::before { width: 84px; height: 84px; }
+
+  .wish-actions {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .wish-actions > .primary,
+  .wish-actions > .ghost { flex: 1 1 200px; }
+
+  .admin-row { flex: 1 1 100%; }
+}
+
 @media (max-width: 720px) {
   .row { grid-template-columns: 1fr; }
 
@@ -1137,15 +1161,24 @@ footer small {
   .lock-line .primary { flex: 1 1 auto; }
 }
 
-@media (max-width: 430px) {
-  .list { grid-template-columns: 1fr; }
+@media (max-width: 480px) {
+  .wish { gap: 10px 14px; padding: 14px; }
+
+  .wish { grid-template-columns: 68px minmax(0, 1fr); }
+
+  .thumb, .wish.no-image::before { width: 68px; height: 68px; }
+
+  .wish.no-image::before {
+    background-image:
+      radial-gradient(circle 8px at 50% 50%, rgba(253, 251, 245, .95) 98%, rgba(0, 0, 0, 0) 100%),
+      repeating-linear-gradient(112deg,
+        rgba(255, 255, 255, .06) 0px, rgba(255, 255, 255, .06) 12px,
+        rgba(0, 0, 0, 0) 12px, rgba(0, 0, 0, 0) 24px);
+  }
+
+  .wish-title { font-size: 1.12rem; }
 
   .stat-label { letter-spacing: .07em; font-size: .68rem; }
-}
-
-/* Sehr breite Bildschirme: Karten nicht ins Unendliche ziehen */
-@media (min-width: 1100px) {
-  .list { grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
 }
 
 /* ---------- 19. Zeigergeräte vs. Touch ---------------------- */

@@ -115,39 +115,52 @@ img { max-width: 100%; }
   padding-inline: var(--gutter);
 }
 
-/* ---------- 3. Tartan --------------------------------------- */
-/* Zwei gekreuzte Streifenraster über tiefem Grün. Die Kreuzungen
-   dunkeln sich von selbst ab – das ergibt den typischen Karo-Look,
-   ganz ohne Bilddatei.                                          */
+/* ---------- 3. Crawford-Tartan ------------------------------ */
+/* Nachgewebt nach dem Thread Count des Crawford-Setts
+   (Vestiarium Scoticum 1842):  DC/12 W4 DC60 G24 DC6 G24 DC/6
+   – an den Pivots gespiegelt ergibt das einen Rapport von 254 Fäden.
+   Kette (warp) deckend, Schuss (weft) halbtransparent darüber:
+   an den Kreuzungen mischen sich die Farben wie im echten Gewebe.
+   1 Faden = 0,30px, Rapport 76.2px.                            */
 
 .tartan,
 .tartan-band {
-  background-color: #1b4f34;
+  background-color: #7e2130;
   background-image:
-    repeating-linear-gradient(90deg,
-      rgba(9, 30, 18, .6)     0px, rgba(9, 30, 18, .6)     4px,
-      rgba(0, 0, 0, 0)        4px, rgba(0, 0, 0, 0)       11px,
-      rgba(143, 47, 40, .54) 11px, rgba(143, 47, 40, .54) 18px,
-      rgba(0, 0, 0, 0)       18px, rgba(0, 0, 0, 0)       23px,
-      rgba(52, 97, 127, .44) 23px, rgba(52, 97, 127, .44) 27px,
-      rgba(0, 0, 0, 0)       27px, rgba(0, 0, 0, 0)       33px,
-      rgba(247, 242, 231, .46) 33px, rgba(247, 242, 231, .46) 35px,
-      rgba(0, 0, 0, 0)       35px, rgba(0, 0, 0, 0)       40px),
     repeating-linear-gradient(0deg,
-      rgba(9, 30, 18, .6)     0px, rgba(9, 30, 18, .6)     4px,
-      rgba(0, 0, 0, 0)        4px, rgba(0, 0, 0, 0)       11px,
-      rgba(143, 47, 40, .54) 11px, rgba(143, 47, 40, .54) 18px,
-      rgba(0, 0, 0, 0)       18px, rgba(0, 0, 0, 0)       23px,
-      rgba(52, 97, 127, .44) 23px, rgba(52, 97, 127, .44) 27px,
-      rgba(0, 0, 0, 0)       27px, rgba(0, 0, 0, 0)       33px,
-      rgba(247, 242, 231, .46) 33px, rgba(247, 242, 231, .46) 35px,
-      rgba(0, 0, 0, 0)       35px, rgba(0, 0, 0, 0)       40px);
+      rgba(126, 33, 48, .55) 0.00px, rgba(126, 33, 48, .55) 3.60px,
+      rgba(236, 227, 209, .62) 3.60px, rgba(236, 227, 209, .62) 4.80px,
+      rgba(126, 33, 48, .55) 4.80px, rgba(126, 33, 48, .55) 22.80px,
+      rgba(29, 71, 50, .66) 22.80px, rgba(29, 71, 50, .66) 30.00px,
+      rgba(126, 33, 48, .55) 30.00px, rgba(126, 33, 48, .55) 31.80px,
+      rgba(29, 71, 50, .66) 31.80px, rgba(29, 71, 50, .66) 39.00px,
+      rgba(126, 33, 48, .55) 39.00px, rgba(126, 33, 48, .55) 40.80px,
+      rgba(29, 71, 50, .66) 40.80px, rgba(29, 71, 50, .66) 48.00px,
+      rgba(126, 33, 48, .55) 48.00px, rgba(126, 33, 48, .55) 49.80px,
+      rgba(29, 71, 50, .66) 49.80px, rgba(29, 71, 50, .66) 57.00px,
+      rgba(126, 33, 48, .55) 57.00px, rgba(126, 33, 48, .55) 75.00px,
+      rgba(236, 227, 209, .62) 75.00px, rgba(236, 227, 209, .62) 76.20px),
+    repeating-linear-gradient(90deg,
+      #7e2130 0.00px, #7e2130 3.60px,
+      #ece3d1 3.60px, #ece3d1 4.80px,
+      #7e2130 4.80px, #7e2130 22.80px,
+      #1d4732 22.80px, #1d4732 30.00px,
+      #7e2130 30.00px, #7e2130 31.80px,
+      #1d4732 31.80px, #1d4732 39.00px,
+      #7e2130 39.00px, #7e2130 40.80px,
+      #1d4732 40.80px, #1d4732 48.00px,
+      #7e2130 48.00px, #7e2130 49.80px,
+      #1d4732 49.80px, #1d4732 57.00px,
+      #7e2130 57.00px, #7e2130 75.00px,
+      #ece3d1 75.00px, #ece3d1 76.20px);
 }
 
-/* Karo-Band unter dem Kopfbereich: hoch genug, damit die Kreuzung sichtbar wird */
+/* Karo-Band unter dem Kopfbereich: hoch genug, dass die Kreuzungen
+   des Setts wirklich zu sehen sind. */
 .tartan-band {
-  height: 20px;
-  box-shadow: inset 0 1px 0 rgba(9, 30, 18, .5), inset 0 -1px 0 rgba(9, 30, 18, .35);
+  height: 32px;
+  box-shadow: inset 0 2px 0 rgba(9, 30, 18, .45),
+              inset 0 -2px 0 rgba(9, 30, 18, .3);
 }
 
 /* ---------- 4. Dekorative Ebene: Golfbälle ------------------ */
@@ -173,7 +186,7 @@ img { max-width: 100%; }
 }
 
 /* Golfball: heller Kern plus feines Dimple-Raster */
-.mote.ball {
+.ball {
   border-radius: 50%;
   background-color: #fdfbf5;
   background-image:
@@ -185,29 +198,104 @@ img { max-width: 100%; }
               0 1px 3px rgba(20, 48, 31, .12);
 }
 
-.mote.tee {
-  transform: rotate(var(--rot, 0deg));
+.tee {
   background: center / contain no-repeat
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4.5 2.6h15l-4.9 4.9c-.7.7-1.1 1.6-1.1 2.5V19l-1.5 2.9L10.5 19V10c0-.9-.4-1.8-1.1-2.5L4.5 2.6z' fill='%23c7a76b'/%3E%3C/svg%3E");
 }
 
-.mote.tennis {
+.tennis {
   border-radius: 50%;
   background: center / contain no-repeat
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11.2' fill='%23c3d65a'/%3E%3Cpath d='M1.6 7.4C7 8.6 10.4 12.4 11.3 22.8M22.4 7.4C17 8.6 13.6 12.4 12.7 22.8' fill='none' stroke='%23fffdf8' stroke-width='1.5'/%3E%3C/svg%3E");
 }
 
-.mote.football {
+.football {
   border-radius: 50%;
   background: center / contain no-repeat
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11.2' fill='%23fdfbf5' stroke='%2334493a' stroke-width='1'/%3E%3Cpath d='M12 5.4l4.4 3.2-1.7 5.2H9.3L7.6 8.6z' fill='%2314301f'/%3E%3C/svg%3E");
 }
 
 @keyframes drift {
-  0%   { transform: translate3d(0, 0, 0);                          opacity: 0; }
+  0%   { transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg));                          opacity: 0; }
   12%  {                                                           opacity: .42; }
   88%  {                                                           opacity: .34; }
-  100% { transform: translate3d(var(--drift, 0px), -128vh, 0);     opacity: 0; }
+  100% { transform: translate3d(var(--drift, 0px), -128vh, 0) rotate(var(--rot, 0deg)); opacity: 0; }
+}
+
+
+/* ---------- 4b. Begrüßung: hereinfallende Bälle --------------- */
+/* Läuft genau einmal beim Laden der Seite, dauert gut drei Sekunden
+   und blendet sich danach vollständig aus. Klicks gehen immer durch. */
+
+.drop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  overflow: hidden;
+  animation: drop-done .35s linear 4.2s forwards;
+}
+
+@keyframes drop-done {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.drop span {
+  position: absolute;
+  top: 0;
+  left: var(--x);
+  width: var(--s);
+  height: var(--s);
+  margin-left: calc(var(--s) / -2);
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: fall var(--dur, 2.3s) var(--d, 0s) 1 both;
+  filter: drop-shadow(0 6px 10px rgba(20, 48, 31, .22));
+}
+
+/* Fallen, einmal aufspringen, ausrollen, verschwinden. */
+@keyframes fall {
+  0% {
+    transform: translate3d(0, -25vh, 0) rotate(0deg);
+    opacity: 0;
+    animation-timing-function: cubic-bezier(.55, 0, .85, .3);   /* Beschleunigung */
+  }
+  8%   { opacity: 1; }
+  46% {
+    transform: translate3d(0, 78vh, 0) rotate(var(--spin, 360deg));
+    opacity: 1;
+    animation-timing-function: cubic-bezier(.2, .6, .35, 1);    /* Absprung */
+  }
+  62% {
+    transform: translate3d(calc(var(--drift, 0px) * .45), 54vh, 0) rotate(calc(var(--spin, 360deg) * 1.2));
+    animation-timing-function: cubic-bezier(.6, 0, .85, .4);
+  }
+  76% {
+    transform: translate3d(calc(var(--drift, 0px) * .72), 78vh, 0) rotate(calc(var(--spin, 360deg) * 1.32));
+    animation-timing-function: cubic-bezier(.2, .6, .35, 1);
+  }
+  86% {
+    transform: translate3d(calc(var(--drift, 0px) * .88), 68vh, 0) rotate(calc(var(--spin, 360deg) * 1.4));
+    animation-timing-function: cubic-bezier(.6, 0, .9, .5);
+  }
+  96%  { opacity: 1; }
+  100% {
+    transform: translate3d(var(--drift, 0px), 79vh, 0) rotate(calc(var(--spin, 360deg) * 1.48));
+    opacity: 0;
+  }
+}
+
+/* Titelblock zieht beim Laden ruhig nach oben ein. Bewusst auf den
+   Kindelementen, nicht auf .hero-text – dort sitzt die Parallaxe. */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes rule-in {
+  from { width: 0; opacity: 0; }
+  to   { width: 84px; opacity: 1; }
 }
 
 /* ---------- 5. Kopfbereich ---------------------------------- */
@@ -252,6 +340,7 @@ img { max-width: 100%; }
 .hero-mark {
   display: inline-flex;
   margin-bottom: 18px;
+  animation: rise-in .75s cubic-bezier(.2, .7, .3, 1) .1s both;
 }
 
 .hero h1 {
@@ -259,6 +348,7 @@ img { max-width: 100%; }
   letter-spacing: -.02em;
   color: #fffdf6;
   text-wrap: balance;
+  animation: rise-in .8s cubic-bezier(.2, .7, .3, 1) .24s both;
 }
 
 .hero h1::after {
@@ -267,6 +357,7 @@ img { max-width: 100%; }
   width: 84px;
   height: 3px;
   margin: 22px auto 0;
+  animation: rule-in .7s cubic-bezier(.2, .7, .3, 1) .62s both;
   border-radius: 2px;
   background: linear-gradient(90deg, var(--claret-soft) 0 34%, #cdb98a 34% 68%, var(--thistle) 68% 100%);
 }
@@ -277,6 +368,7 @@ img { max-width: 100%; }
   font-size: clamp(1.02rem, 1.6vw, 1.16rem);
   line-height: 1.68;
   color: var(--on-dark-soft);
+  animation: rise-in .8s cubic-bezier(.2, .7, .3, 1) .4s both;
 }
 
 /* Hügel- und Fairway-Silhouette */
@@ -347,16 +439,20 @@ main {
   position: absolute;
   left: 0; top: 0; bottom: 0;
   width: 7px;
-  background-color: #1b4f34;
+  background-color: #7e2130;
   background-image: repeating-linear-gradient(0deg,
-    rgba(9, 30, 18, .62)    0px, rgba(9, 30, 18, .62)    4px,
-    rgba(0, 0, 0, 0)        4px, rgba(0, 0, 0, 0)       12px,
-    rgba(143, 47, 40, .8)  12px, rgba(143, 47, 40, .8)  19px,
-    rgba(0, 0, 0, 0)       19px, rgba(0, 0, 0, 0)       24px,
-    rgba(52, 97, 127, .62) 24px, rgba(52, 97, 127, .62) 28px,
-    rgba(0, 0, 0, 0)       28px, rgba(0, 0, 0, 0)       34px,
-    rgba(247, 242, 231, .7) 34px, rgba(247, 242, 231, .7) 36px,
-    rgba(0, 0, 0, 0)       36px, rgba(0, 0, 0, 0)       42px);
+    #7e2130 0.00px, #7e2130 2.64px,
+    #ece3d1 2.64px, #ece3d1 3.52px,
+    #7e2130 3.52px, #7e2130 16.72px,
+    #1d4732 16.72px, #1d4732 22.00px,
+    #7e2130 22.00px, #7e2130 23.32px,
+    #1d4732 23.32px, #1d4732 28.60px,
+    #7e2130 28.60px, #7e2130 29.92px,
+    #1d4732 29.92px, #1d4732 35.20px,
+    #7e2130 35.20px, #7e2130 36.52px,
+    #1d4732 36.52px, #1d4732 41.80px,
+    #7e2130 41.80px, #7e2130 55.00px,
+    #ece3d1 55.00px, #ece3d1 55.88px);
 }
 
 .adminbar-label {
@@ -400,6 +496,8 @@ button {
 }
 
 .primary {
+  position: relative;
+  overflow: hidden;
   background: var(--fairway);
   border-color: var(--fairway);
   color: #fdfbf3;
@@ -429,6 +527,22 @@ button {
   transform: none;
   box-shadow: none;
 }
+
+/* Ein Lichtstreifen wandert beim Überfahren über den Button */
+.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(104deg,
+    rgba(255, 255, 255, 0) 36%,
+    rgba(255, 255, 255, .26) 50%,
+    rgba(255, 255, 255, 0) 64%);
+  transform: translateX(-130%);
+  transition: transform .65s cubic-bezier(.3, .6, .3, 1);
+  pointer-events: none;
+}
+
+.primary:hover::after { transform: translateX(130%); }
 
 /* Der Gegenpol: alles, was rücknimmt oder abbricht */
 .ghost {
@@ -517,16 +631,20 @@ button {
   position: absolute;
   left: 0; right: 0; top: 0;
   height: 6px;
-  background-color: #1b4f34;
+  background-color: #7e2130;
   background-image: repeating-linear-gradient(90deg,
-    rgba(9, 30, 18, .62)    0px, rgba(9, 30, 18, .62)    4px,
-    rgba(0, 0, 0, 0)        4px, rgba(0, 0, 0, 0)       12px,
-    rgba(143, 47, 40, .8)  12px, rgba(143, 47, 40, .8)  19px,
-    rgba(0, 0, 0, 0)       19px, rgba(0, 0, 0, 0)       24px,
-    rgba(52, 97, 127, .62) 24px, rgba(52, 97, 127, .62) 28px,
-    rgba(0, 0, 0, 0)       28px, rgba(0, 0, 0, 0)       34px,
-    rgba(247, 242, 231, .7) 34px, rgba(247, 242, 231, .7) 36px,
-    rgba(0, 0, 0, 0)       36px, rgba(0, 0, 0, 0)       42px);
+    #7e2130 0.00px, #7e2130 2.64px,
+    #ece3d1 2.64px, #ece3d1 3.52px,
+    #7e2130 3.52px, #7e2130 16.72px,
+    #1d4732 16.72px, #1d4732 22.00px,
+    #7e2130 22.00px, #7e2130 23.32px,
+    #1d4732 23.32px, #1d4732 28.60px,
+    #7e2130 28.60px, #7e2130 29.92px,
+    #1d4732 29.92px, #1d4732 35.20px,
+    #7e2130 35.20px, #7e2130 36.52px,
+    #1d4732 36.52px, #1d4732 41.80px,
+    #7e2130 41.80px, #7e2130 55.00px,
+    #ece3d1 55.00px, #ece3d1 55.88px);
 }
 
 .panel h2 {
@@ -722,6 +840,16 @@ input[type="password"]:focus {
 
 .wish:hover .thumb { transform: scale(1.03); }
 
+/* kleiner Putt: der Ball im Fairway-Feld hüpft einmal an */
+@keyframes putt {
+  0%, 100% { background-position: 0 0, 0 0; }
+  32%      { background-position: 0 -9px, 0 0; }
+  58%      { background-position: 0 3px, 0 0; }
+  80%      { background-position: 0 -3px, 0 0; }
+}
+
+.wish.no-image:hover::before { animation: putt .62s ease-out; }
+
 /* Ohne Produktbild steht an gleicher Stelle ein Fairway-Feld mit Golfball,
    damit alle Zeilen sauber in einer Flucht bleiben. */
 .wish.no-image::before {
@@ -860,6 +988,12 @@ input[type="password"]:focus {
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   text-align: center;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.stat:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .stat::before {
@@ -1039,31 +1173,39 @@ footer small {
 
 .shell-divider {
   display: block;
-  width: 132px;
-  height: 14px;
+  width: 138px;
+  height: 20px;
   margin: 0 auto 18px;
   border-radius: 3px;
-  background-color: #1b4f34;
+  background-color: #7e2130;
   background-image:
-    repeating-linear-gradient(90deg,
-      rgba(9, 30, 18, .6)     0px, rgba(9, 30, 18, .6)     4px,
-      rgba(0, 0, 0, 0)        4px, rgba(0, 0, 0, 0)       11px,
-      rgba(143, 47, 40, .58)  11px, rgba(143, 47, 40, .58)  18px,
-      rgba(0, 0, 0, 0)       18px, rgba(0, 0, 0, 0)       23px,
-      rgba(52, 97, 127, .48)  23px, rgba(52, 97, 127, .48)  27px,
-      rgba(0, 0, 0, 0)       27px, rgba(0, 0, 0, 0)       33px,
-      rgba(247, 242, 231, .5) 33px, rgba(247, 242, 231, .5) 35px,
-      rgba(0, 0, 0, 0)       35px, rgba(0, 0, 0, 0)       40px),
     repeating-linear-gradient(0deg,
-      rgba(9, 30, 18, .6)     0px, rgba(9, 30, 18, .6)     4px,
-      rgba(0, 0, 0, 0)        4px, rgba(0, 0, 0, 0)       11px,
-      rgba(143, 47, 40, .58)  11px, rgba(143, 47, 40, .58)  18px,
-      rgba(0, 0, 0, 0)       18px, rgba(0, 0, 0, 0)       23px,
-      rgba(52, 97, 127, .48)  23px, rgba(52, 97, 127, .48)  27px,
-      rgba(0, 0, 0, 0)       27px, rgba(0, 0, 0, 0)       33px,
-      rgba(247, 242, 231, .5) 33px, rgba(247, 242, 231, .5) 35px,
-      rgba(0, 0, 0, 0)       35px, rgba(0, 0, 0, 0)       40px);
-  box-shadow: inset 0 0 0 1px rgba(9, 30, 18, .45);
+      rgba(126, 33, 48, .55) 0.00px, rgba(126, 33, 48, .55) 2.64px,
+      rgba(236, 227, 209, .62) 2.64px, rgba(236, 227, 209, .62) 3.52px,
+      rgba(126, 33, 48, .55) 3.52px, rgba(126, 33, 48, .55) 16.72px,
+      rgba(29, 71, 50, .66) 16.72px, rgba(29, 71, 50, .66) 22.00px,
+      rgba(126, 33, 48, .55) 22.00px, rgba(126, 33, 48, .55) 23.32px,
+      rgba(29, 71, 50, .66) 23.32px, rgba(29, 71, 50, .66) 28.60px,
+      rgba(126, 33, 48, .55) 28.60px, rgba(126, 33, 48, .55) 29.92px,
+      rgba(29, 71, 50, .66) 29.92px, rgba(29, 71, 50, .66) 35.20px,
+      rgba(126, 33, 48, .55) 35.20px, rgba(126, 33, 48, .55) 36.52px,
+      rgba(29, 71, 50, .66) 36.52px, rgba(29, 71, 50, .66) 41.80px,
+      rgba(126, 33, 48, .55) 41.80px, rgba(126, 33, 48, .55) 55.00px,
+      rgba(236, 227, 209, .62) 55.00px, rgba(236, 227, 209, .62) 55.88px),
+    repeating-linear-gradient(90deg,
+      #7e2130 0.00px, #7e2130 2.64px,
+      #ece3d1 2.64px, #ece3d1 3.52px,
+      #7e2130 3.52px, #7e2130 16.72px,
+      #1d4732 16.72px, #1d4732 22.00px,
+      #7e2130 22.00px, #7e2130 23.32px,
+      #1d4732 23.32px, #1d4732 28.60px,
+      #7e2130 28.60px, #7e2130 29.92px,
+      #1d4732 29.92px, #1d4732 35.20px,
+      #7e2130 35.20px, #7e2130 36.52px,
+      #1d4732 36.52px, #1d4732 41.80px,
+      #7e2130 41.80px, #7e2130 55.00px,
+      #ece3d1 55.00px, #ece3d1 55.88px);
+  box-shadow: inset 0 0 0 1px rgba(9, 30, 18, .5);
 }
 
 /* ---------- 17. Anmeldung ----------------------------------- */
@@ -1204,7 +1346,17 @@ footer small {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 
-  .motes { display: none; }
+  .motes, .drop { display: none; }
+
+  .hero-mark, .hero h1, .hero h1::after, .lede { animation: none; }
+
+  .hero h1::after { width: 84px; opacity: 1; }
+
+  .primary::after { display: none; }
+
+  .wish.no-image:hover::before { animation: none; }
+
+  .stat:hover { transform: none; }
 
   .skeleton { animation: none; }
 

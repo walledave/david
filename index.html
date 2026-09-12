@@ -14,6 +14,23 @@
 </head>
 <body>
 
+<!-- Einmalige Begrüßung: beim Öffnen der Seite fallen Bälle herein,
+     springen einmal auf und verschwinden wieder. Rein dekorativ. -->
+<div class="drop" aria-hidden="true">
+  <span class="ball"     style="--x:7%;  --s:26px; --dur:2.1s; --d:.05s; --drift:14px;  --spin:420deg"></span>
+  <span class="ball"     style="--x:16%; --s:18px; --dur:2.4s; --d:.42s; --drift:-9px;  --spin:-300deg"></span>
+  <span class="football" style="--x:24%; --s:30px; --dur:2.2s; --d:.68s; --drift:18px;  --spin:340deg"></span>
+  <span class="ball"     style="--x:33%; --s:22px; --dur:2.5s; --d:.18s; --drift:-16px; --spin:380deg"></span>
+  <span class="tee"      style="--x:41%; --s:24px; --dur:2.3s; --d:.95s; --drift:11px;  --spin:520deg"></span>
+  <span class="ball"     style="--x:49%; --s:28px; --dur:2.0s; --d:.55s; --drift:-12px; --spin:-360deg"></span>
+  <span class="ball"     style="--x:57%; --s:16px; --dur:2.6s; --d:.3s;  --drift:15px;  --spin:300deg"></span>
+  <span class="tennis"   style="--x:65%; --s:24px; --dur:2.3s; --d:.8s;  --drift:-14px; --spin:400deg"></span>
+  <span class="ball"     style="--x:73%; --s:24px; --dur:2.2s; --d:.12s; --drift:10px;  --spin:-420deg"></span>
+  <span class="ball"     style="--x:81%; --s:19px; --dur:2.5s; --d:.62s; --drift:-17px; --spin:360deg"></span>
+  <span class="tee"      style="--x:88%; --s:21px; --dur:2.4s; --d:1.05s; --drift:8px;  --spin:-480deg"></span>
+  <span class="ball"     style="--x:94%; --s:27px; --dur:2.1s; --d:.35s; --drift:-11px; --spin:400deg"></span>
+</div>
+
 <!-- Dekorative Ebene: langsam schwebende Golfbälle, ein paar Tees und
      vereinzelt ein Tennis- oder Fußball. Rein visuell, aria-hidden,
      liegt hinter allen Inhalten und fängt keine Klicks ab. -->

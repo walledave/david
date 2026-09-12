@@ -399,83 +399,116 @@ img { max-width: 100%; }
   .putt { height: 76px; }
 }
 
-/* ---------- 5. Kopfbereich ---------------------------------- */
+/* ---------- 5. Kopfleiste ----------------------------------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--pine);
+  color: var(--on-dark);
+  box-shadow: 0 1px 0 rgba(244, 239, 226, .1), 0 6px 18px -12px rgba(9, 24, 15, .8);
+}
+
+.topbar-tartan {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 16px;
+  background-color: #7e2130;
+  background-image: repeating-linear-gradient(0deg,
+    rgba(9, 30, 18, .62)    0px, rgba(9, 30, 18, .62)   3.6px,
+    rgba(0, 0, 0, 0)      3.6px, rgba(0, 0, 0, 0)      11.4px,
+    rgba(143, 47, 40, .8) 11.4px, rgba(143, 47, 40, .8) 18.6px,
+    rgba(0, 0, 0, 0)     18.6px, rgba(0, 0, 0, 0)      23.4px,
+    rgba(52, 97, 127, .62) 23.4px, rgba(52, 97, 127, .62) 27px,
+    rgba(0, 0, 0, 0)       27px, rgba(0, 0, 0, 0)       33px,
+    rgba(247, 242, 231, .7) 33px, rgba(247, 242, 231, .7) 35.4px,
+    rgba(0, 0, 0, 0)     35.4px, rgba(0, 0, 0, 0)       41.4px);
+}
+
+.topbar-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 26px;
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 12px var(--gutter);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: auto;
+  color: #fffdf6;
+  text-decoration: none;
+}
+
+.brand .clubs { color: #e6dcbd; flex: none; }
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+.topnav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 24px;
+}
+
+.topnav-link,
+.topnav-login {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
+  color: var(--on-dark-soft);
+  font-size: .93rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color .15s ease, border-color .15s ease;
+}
+
+.topnav-link:hover,
+.topnav-login:hover { color: #fffdf6; border-bottom-color: #a8bf7a; }
+
+.topnav-link { border-bottom-color: #a8bf7a; color: #fffdf6; }
+
+/* Im Admin-Modus führt „Anmelden" ins Leere – dann ausblenden. */
+.adminbar:not([hidden]) ~ .topnav-login { display: none; }
+
+/* ---------- 5b. Kopfbild ------------------------------------ */
 
 .hero {
   position: relative;
   z-index: 1;
   isolation: isolate;
-  background: #081a12;
-  color: var(--on-dark);
-  padding: clamp(56px, 11vw, 116px) 0 0;
-  min-height: clamp(460px, 62vh, 680px);
+  min-height: clamp(300px, 38vw, 420px);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: #dfd3b4;
   overflow: hidden;
 }
 
-/* Leseschleier: hält den Text vom Platz gelöst, ohne ihn abzudecken */
-.hero::before {
-  content: "";
+/* Foto, sobald assets/hero.jpg im Ordner liegt. Fehlt es, bleibt die
+   Ebene leer und die gezeichnete Szene darunter bleibt sichtbar. */
+.hero-photo {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background:
-    radial-gradient(72% 52% at 50% 26%, rgba(6, 20, 13, .72) 0%, rgba(6, 20, 13, .34) 55%, rgba(6, 20, 13, 0) 100%);
-  pointer-events: none;
+  background-image: url("assets/hero.jpg");
+  background-size: cover;
+  background-position: center 58%;
 }
 
-.hero-inner {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: var(--wrap);
-  margin: 0 auto;
-  padding: 0 var(--gutter) clamp(60px, 12vw, 128px);
-}
-
-.hero-text {
-  max-width: 46rem;
-  margin-inline: auto;
-  text-align: center;
-}
-
-.hero-mark {
-  display: inline-flex;
-  margin-bottom: 18px;
-  animation: rise-in .75s cubic-bezier(.2, .7, .3, 1) .1s both;
-}
-
-.hero h1 {
-  font-size: clamp(2.5rem, 7.4vw, 4.25rem);
-  letter-spacing: -.02em;
-  color: #fffdf6;
-  text-wrap: balance;
-  animation: rise-in .8s cubic-bezier(.2, .7, .3, 1) .24s both;
-}
-
-.hero h1::after {
-  content: "";
-  display: block;
-  width: 84px;
-  height: 3px;
-  margin: 22px auto 0;
-  animation: rule-in .7s cubic-bezier(.2, .7, .3, 1) .62s both;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--claret-soft) 0 34%, #cdb98a 34% 68%, var(--thistle) 68% 100%);
-}
-
-.lede {
-  margin: 22px auto 0;
-  max-width: 40rem;
-  font-size: clamp(1.02rem, 1.6vw, 1.16rem);
-  line-height: 1.68;
-  color: var(--on-dark-soft);
-  animation: rise-in .8s cubic-bezier(.2, .7, .3, 1) .4s both;
-}
-
-/* Platzansicht als Hintergrund des Kopfbereichs */
 .hero-scene {
   position: absolute;
   inset: 0;
@@ -484,41 +517,118 @@ img { max-width: 100%; }
   pointer-events: none;
 }
 
-.hero-scene svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
+.hero-scene svg { display: block; width: 100%; height: 100%; }
 
 .hero-grain {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='180'%20height='180'><filter%20id='n'><feTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='4'%20stitchTiles='stitch'%20seed='9'/><feColorMatrix%20type='saturate'%20values='0'/></filter><rect%20width='180'%20height='180'%20filter='url%28%23n%29'%20opacity='.55'/></svg>") repeat;
+  background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='180'%20height='180'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='4'%20stitchTiles='stitch'%20seed='9'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='180'%20height='180'%20filter='url(%23n)'%20opacity='.55'/%3E%3C/svg%3E") repeat;
   background-size: 180px 180px;
   mix-blend-mode: overlay;
-  opacity: .3;
+  opacity: .22;
 }
 
-/* eine zweite, gröbere Lage bricht das Raster auf */
-.hero-grain::after {
+/* Heller Schleier links: darauf steht die dunkle Schrift ruhig und lesbar */
+.hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: inherit;
-  background-size: 420px 420px;
-  mix-blend-mode: soft-light;
-  opacity: .55;
+  z-index: 2;
+  background: linear-gradient(100deg,
+    rgba(250, 246, 236, .97) 0%,
+    rgba(250, 246, 236, .94) 24%,
+    rgba(250, 246, 236, .68) 41%,
+    rgba(250, 246, 236, .12) 60%,
+    rgba(250, 246, 236, 0) 72%);
+  pointer-events: none;
 }
 
+.hero-inner {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: clamp(30px, 5vw, 54px) var(--gutter);
+}
+
+.hero-text { max-width: 34rem; }
+
+.hero-eyebrow {
+  margin: 0 0 10px;
+  font-size: .76rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--fairway);
+  animation: rise-in .7s cubic-bezier(.2, .7, .3, 1) .1s both;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 3.9rem);
+  letter-spacing: -.025em;
+  color: var(--pine);
+  text-wrap: balance;
+  animation: rise-in .8s cubic-bezier(.2, .7, .3, 1) .24s both;
+}
+
+.lede {
+  margin: 16px 0 0;
+  max-width: 30rem;
+  font-size: clamp(.98rem, 1.4vw, 1.08rem);
+  line-height: 1.62;
+  color: #3f4a41;
+  animation: rise-in .8s cubic-bezier(.2, .7, .3, 1) .4s both;
+}
+
+/* Handschriftlicher Gruß rechts unten im Bild */
+.hero-script {
+  position: absolute;
+  z-index: 3;
+  right: clamp(20px, 5vw, 64px);
+  bottom: clamp(46px, 7vw, 74px);
+  font-family: "Caveat", "Segoe Script", cursive;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-weight: 600;
+  line-height: 1.05;
+  text-align: center;
+  color: #fffdf4;
+  text-shadow: 0 2px 12px rgba(13, 34, 21, .9), 0 0 4px rgba(13, 34, 21, .55);
+  animation: rise-in 1s cubic-bezier(.2, .7, .3, 1) .8s both;
+}
+
+/* weicher Schatten dahinter, damit die Schrift auch auf hellem
+   Himmel oder hellem Foto sicher lesbar bleibt */
+.hero-script::before {
+  content: "";
+  position: absolute;
+  inset: -26px -34px;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(11, 30, 19, .5), rgba(11, 30, 19, 0) 100%);
+}
+
+.hero-script::after {
+  content: "";
+  display: block;
+  width: 62%;
+  height: 2px;
+  margin: 6px auto 0;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: .7;
+}
 
 .hero .tartan-band {
   position: relative;
-  z-index: 3;
+  z-index: 4;
   margin-top: auto;
 }
 
 /* ---------- 6. Hauptbereich --------------------------------- */
+
+#list { scroll-margin-top: 92px; }
 
 main {
   position: relative;
@@ -539,59 +649,25 @@ main {
   transform: none;
 }
 
-/* ---------- 7. Admin-Leiste --------------------------------- */
+/* ---------- 7. Admin-Leiste in der Kopfzeile ---------------- */
 
 .adminbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px 18px;
-  margin: 0 0 22px;
-  padding: 13px 16px 13px 20px;
-  border-radius: var(--r-md);
-  background: linear-gradient(180deg, #1b3d28, var(--pine));
-  color: var(--on-dark);
-  box-shadow: var(--shadow-md);
-  position: relative;
-  overflow: hidden;
-}
-
-/* schmale Tartan-Kante als Kennzeichnung des Admin-Bereichs */
-.adminbar::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 7px;
-  background-color: #7e2130;
-  background-image: repeating-linear-gradient(0deg,
-    #7e2130 0.00px, #7e2130 2.64px,
-    #ece3d1 2.64px, #ece3d1 3.52px,
-    #7e2130 3.52px, #7e2130 16.72px,
-    #1d4732 16.72px, #1d4732 22.00px,
-    #7e2130 22.00px, #7e2130 23.32px,
-    #1d4732 23.32px, #1d4732 28.60px,
-    #7e2130 28.60px, #7e2130 29.92px,
-    #1d4732 29.92px, #1d4732 35.20px,
-    #7e2130 35.20px, #7e2130 36.52px,
-    #1d4732 36.52px, #1d4732 41.80px,
-    #7e2130 41.80px, #7e2130 55.00px,
-    #ece3d1 55.00px, #ece3d1 55.88px);
+  gap: 8px 14px;
+  padding: 5px 6px 5px 14px;
+  border: 1px solid rgba(168, 191, 122, .35);
+  border-radius: var(--r-pill);
+  background: rgba(0, 0, 0, .22);
 }
 
 .adminbar-label {
-  flex: 1 1 auto;
-  padding-left: 6px;
-  font-size: .74rem;
+  font-size: .7rem;
   font-weight: 600;
-  letter-spacing: .16em;
+  letter-spacing: .15em;
   text-transform: uppercase;
   color: #b9cfae;
-}
-
-.adminbar-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
 }
 
 /* ---------- 8. Buttons -------------------------------------- */
@@ -741,6 +817,7 @@ button {
 .panel {
   position: relative;
   margin: 0 0 26px;
+  scroll-margin-top: 92px;
   padding: clamp(22px, 3.6vw, 32px);
   border: 1px solid var(--sand-line);
   border-radius: var(--r-lg);
@@ -926,11 +1003,12 @@ input[type="password"]:focus {
 }
 
 .wish {
+  position: relative;
   display: grid;
   grid-template-columns: 96px minmax(0, 1fr) auto;
   gap: 12px 22px;
   align-items: center;
-  padding: 16px 20px;
+  padding: 34px 20px 16px;
   border: 1px solid var(--sand-line);
   border-radius: var(--r-lg);
   background: var(--paper);
@@ -1037,10 +1115,32 @@ input[type="password"]:focus {
   border-bottom-color: var(--claret);
 }
 
+/* Status: „Offen" für freie Zeilen, der Badge für vergebene – beide
+   sitzen an derselben Stelle oben rechts auf der Karte. */
+.wish:not(.taken)::after {
+  content: "Offen";
+  position: absolute;
+  top: 13px;
+  right: 18px;
+  padding: 3px 11px 3px 22px;
+  border: 1px solid rgba(31, 92, 58, .3);
+  border-radius: var(--r-pill);
+  background: rgba(31, 92, 58, .08)
+    radial-gradient(circle 3.4px at 12px 50%, var(--fairway) 98%, rgba(0, 0, 0, 0) 100%) no-repeat;
+  color: var(--fairway-dark);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
 .badge {
+  position: absolute;
+  top: 13px;
+  right: 18px;
   display: inline-flex;
   align-items: center;
-  padding: 3px 10px;
+  padding: 3px 11px;
   border-radius: var(--r-pill);
   background: rgba(143, 47, 40, .1);
   border: 1px solid rgba(143, 47, 40, .26);
@@ -1088,7 +1188,7 @@ input[type="password"]:focus {
 
 .wish.taken .wish-title { color: var(--ink-soft); }
 
-/* ---------- 12. Übersicht (Scorecard) unter der Liste ------- */
+/* ---------- 12. Übersicht unter der Liste ------------------- */
 
 .summary {
   display: grid;
@@ -1101,16 +1201,14 @@ input[type="password"]:focus {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  padding: 18px 10px 16px;
+  align-items: flex-start;
+  gap: 3px;
+  padding: 18px 20px 17px;
   border: 1px solid var(--sand-line);
   border-radius: var(--r-md);
   background: var(--paper);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-  text-align: center;
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
@@ -1130,6 +1228,16 @@ input[type="password"]:focus {
 .stat:nth-child(2)::before { background: var(--thistle); }
 .stat:nth-child(3)::before { background: var(--claret); }
 
+.stat-icon {
+  display: inline-flex;
+  margin-bottom: 8px;
+  color: var(--ink-faint);
+}
+
+.stat:nth-child(1) .stat-icon { color: var(--fairway); }
+.stat:nth-child(2) .stat-icon { color: var(--thistle); }
+.stat:nth-child(3) .stat-icon { color: var(--fairway); }
+
 .stat-num {
   font-family: var(--font-display);
   font-size: clamp(1.7rem, 4.4vw, 2.3rem);
@@ -1140,11 +1248,9 @@ input[type="password"]:focus {
 }
 
 .stat-label {
-  font-size: .74rem;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
+  font-size: .84rem;
+  font-weight: 500;
+  color: var(--ink-soft);
 }
 
 /* ---------- 13. Schalter unter der Übersicht ---------------- */
@@ -1152,7 +1258,7 @@ input[type="password"]:focus {
 .toolbar {
   display: flex;
   justify-content: center;
-  margin: 14px 0 0;
+  margin: 16px 0 0;
 }
 
 .switch {
@@ -1204,6 +1310,52 @@ input[type="password"]:focus {
   outline: none;
   box-shadow: inset 0 1px 3px rgba(20, 48, 31, .2), var(--ring);
 }
+
+
+/* ---------- 13b. Kleine Symbole in den Zeilen ---------------- */
+
+.price::before,
+.wish-meta a::before,
+.wish-note::before {
+  content: "";
+  display: inline-block;
+  flex: none;
+  width: 15px;
+  height: 15px;
+  margin-right: 7px;
+  vertical-align: -3px;
+  background: center / contain no-repeat;
+}
+
+.price::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23184a2e' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.4'/%3E%3Cpath d='M12 7.6v8.8M14.4 9.6a2.6 2.6 0 0 0-4.6 1.4c0 2.6 4.8 1.4 4.8 4a2.6 2.6 0 0 1-4.7 1.3'/%3E%3C/svg%3E"); }
+
+.wish-meta a::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334617f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.2 13.8a4 4 0 0 0 5.7 0l2.6-2.6a4 4 0 1 0-5.7-5.7l-1.5 1.5'/%3E%3Cpath d='M13.8 10.2a4 4 0 0 0-5.7 0l-2.6 2.6a4 4 0 1 0 5.7 5.7l1.5-1.5'/%3E%3C/svg%3E"); }
+
+.wish-note::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7364' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s6.6-6.2 6.6-11A6.6 6.6 0 0 0 5.4 10c0 4.8 6.6 11 6.6 11z'/%3E%3Ccircle cx='12' cy='10' r='2.4'/%3E%3C/svg%3E"); }
+
+.wish-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  border-left: 0;
+  padding-left: 0;
+}
+
+.wish-note::before { margin-top: 3px; }
+
+/* Symbol im Aktionsbutton */
+.wish-actions > .primary::before,
+.wish-actions > .ghost::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  flex: none;
+  background: center / contain no-repeat;
+}
+
+.wish-actions > .primary::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fdfbf3' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 21V4M6 5l11 3.4L6 12'/%3E%3C/svg%3E"); }
+
+.wish-actions > .ghost::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238f2f28' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9h9.5a5.5 5.5 0 1 1 0 11H8'/%3E%3Cpath d='M7.5 5L4 9l3.5 4'/%3E%3C/svg%3E"); }
 
 /* ---------- 14. Reservieren / Aufheben ---------------------- */
 
@@ -1267,7 +1419,102 @@ input[type="password"]:focus {
   to   { background-position: -40% 0; }
 }
 
-/* ---------- 16. Ausklang und Fußbereich --------------------- */
+/* ---------- 16. Admin-Bereich ------------------------------- */
+
+.login { margin: clamp(30px, 5vw, 48px) 0 0; scroll-margin-top: 92px; }
+
+.adminbox {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  padding: 20px 24px 20px 34px;
+  border: 1px solid var(--sand-line);
+  border-radius: var(--r-lg);
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.adminbox-tartan {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 14px;
+  background-color: #7e2130;
+  background-image: repeating-linear-gradient(0deg,
+    rgba(9, 30, 18, .62)    0px, rgba(9, 30, 18, .62)   3.6px,
+    rgba(0, 0, 0, 0)      3.6px, rgba(0, 0, 0, 0)      11.4px,
+    rgba(143, 47, 40, .8) 11.4px, rgba(143, 47, 40, .8) 18.6px,
+    rgba(0, 0, 0, 0)     18.6px, rgba(0, 0, 0, 0)      23.4px,
+    rgba(52, 97, 127, .62) 23.4px, rgba(52, 97, 127, .62) 27px,
+    rgba(0, 0, 0, 0)       27px, rgba(0, 0, 0, 0)       33px,
+    rgba(247, 242, 231, .7) 33px, rgba(247, 242, 231, .7) 35.4px,
+    rgba(0, 0, 0, 0)     35.4px, rgba(0, 0, 0, 0)       41.4px);
+}
+
+.adminbox-icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--fairway);
+}
+
+.adminbox-text { flex: 1 1 260px; min-width: 0; }
+
+.adminbox-text h2 {
+  margin: 0 0 4px;
+  font-size: 1.3rem;
+  color: var(--pine);
+}
+
+.adminbox-text p {
+  margin: 0;
+  max-width: 34rem;
+  font-size: .89rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.adminbox-action {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+#login-open {
+  color: var(--fairway);
+  font-size: .93rem;
+  font-weight: 600;
+}
+
+#login-open:hover { color: var(--claret); }
+
+#login-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+#login-pw {
+  flex: 0 1 210px;
+  min-width: 0;
+  padding: 9px 13px;
+}
+
+.login-msg {
+  flex: 1 1 100%;
+  margin: 2px 0 0;
+  font-size: .84rem;
+  color: var(--ink-soft);
+}
+
+.login-msg:empty { display: none; }
+
+.login-msg.error { color: var(--claret); }
+
+/* ---------- 17. Ausklang und Fußbereich --------------------- */
 
 .ausklang {
   position: relative;
@@ -1281,102 +1528,87 @@ input[type="password"]:focus {
 footer {
   position: relative;
   z-index: 1;
-  padding: 34px var(--gutter) 44px;
+  padding: 30px 0 38px;
   background: var(--pine);
   color: var(--on-dark-soft);
-  text-align: center;
+  overflow: hidden;
 }
 
-footer small {
+/* schwacher Platzhorizont im Fuß */
+footer::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 78%;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 160' preserveAspectRatio='xMidYMax slice'%3E%3Cpath d='M0 118c220-26 420 8 640-8 220-16 420 18 620 4 70-5 130 2 180 0v46H0z' fill='%23ffffff' fill-opacity='.05'/%3E%3Cpath d='M0 140c260-20 440 4 660-6 220-10 430 16 620 6 60-3 110 2 160 1v19H0z' fill='%23ffffff' fill-opacity='.045'/%3E%3Cpath d='M726 138V92' stroke='%23ffffff' stroke-opacity='.24' stroke-width='2.4'/%3E%3Cpath d='M726 93l22 7-22 7z' fill='%23ffffff' fill-opacity='.24'/%3E%3C/svg%3E")
+    bottom center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+.footer-tartan {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 16px;
+  background-color: #7e2130;
+  background-image: repeating-linear-gradient(0deg,
+    rgba(9, 30, 18, .62)    0px, rgba(9, 30, 18, .62)   3.6px,
+    rgba(0, 0, 0, 0)      3.6px, rgba(0, 0, 0, 0)      11.4px,
+    rgba(143, 47, 40, .8) 11.4px, rgba(143, 47, 40, .8) 18.6px,
+    rgba(0, 0, 0, 0)     18.6px, rgba(0, 0, 0, 0)      23.4px,
+    rgba(52, 97, 127, .62) 23.4px, rgba(52, 97, 127, .62) 27px,
+    rgba(0, 0, 0, 0)       27px, rgba(0, 0, 0, 0)       33px,
+    rgba(247, 242, 231, .7) 33px, rgba(247, 242, 231, .7) 35.4px,
+    rgba(0, 0, 0, 0)     35.4px, rgba(0, 0, 0, 0)       41.4px);
+}
+
+.footer-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 30px;
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 calc(var(--gutter) + 12px);
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #fffdf6;
+}
+
+.footer-brand .clubs { color: #e6dcbd; flex: none; }
+
+.footer-brand strong {
   display: block;
-  font-size: .84rem;
-  letter-spacing: .04em;
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+.footer-brand small {
+  display: block;
+  margin-top: 2px;
+  font-size: .82rem;
+  letter-spacing: .03em;
   color: #9fb096;
 }
 
-.shell-divider {
-  display: block;
-  width: 138px;
-  height: 20px;
-  margin: 0 auto 18px;
-  border-radius: 3px;
-  background-color: #7e2130;
-  background-image:
-    repeating-linear-gradient(0deg,
-      rgba(126, 33, 48, .55) 0.00px, rgba(126, 33, 48, .55) 2.64px,
-      rgba(236, 227, 209, .62) 2.64px, rgba(236, 227, 209, .62) 3.52px,
-      rgba(126, 33, 48, .55) 3.52px, rgba(126, 33, 48, .55) 16.72px,
-      rgba(29, 71, 50, .66) 16.72px, rgba(29, 71, 50, .66) 22.00px,
-      rgba(126, 33, 48, .55) 22.00px, rgba(126, 33, 48, .55) 23.32px,
-      rgba(29, 71, 50, .66) 23.32px, rgba(29, 71, 50, .66) 28.60px,
-      rgba(126, 33, 48, .55) 28.60px, rgba(126, 33, 48, .55) 29.92px,
-      rgba(29, 71, 50, .66) 29.92px, rgba(29, 71, 50, .66) 35.20px,
-      rgba(126, 33, 48, .55) 35.20px, rgba(126, 33, 48, .55) 36.52px,
-      rgba(29, 71, 50, .66) 36.52px, rgba(29, 71, 50, .66) 41.80px,
-      rgba(126, 33, 48, .55) 41.80px, rgba(126, 33, 48, .55) 55.00px,
-      rgba(236, 227, 209, .62) 55.00px, rgba(236, 227, 209, .62) 55.88px),
-    repeating-linear-gradient(90deg,
-      #7e2130 0.00px, #7e2130 2.64px,
-      #ece3d1 2.64px, #ece3d1 3.52px,
-      #7e2130 3.52px, #7e2130 16.72px,
-      #1d4732 16.72px, #1d4732 22.00px,
-      #7e2130 22.00px, #7e2130 23.32px,
-      #1d4732 23.32px, #1d4732 28.60px,
-      #7e2130 28.60px, #7e2130 29.92px,
-      #1d4732 29.92px, #1d4732 35.20px,
-      #7e2130 35.20px, #7e2130 36.52px,
-      #1d4732 36.52px, #1d4732 41.80px,
-      #7e2130 41.80px, #7e2130 55.00px,
-      #ece3d1 55.00px, #ece3d1 55.88px);
-  box-shadow: inset 0 0 0 1px rgba(9, 30, 18, .5);
+.footer-script {
+  font-family: "Caveat", "Segoe Script", cursive;
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  font-weight: 600;
+  line-height: 1.1;
+  text-align: right;
+  color: #e8e0c8;
 }
-
-/* ---------- 17. Anmeldung ----------------------------------- */
-
-.login { margin-top: 20px; }
-
-#login-open {
-  color: #a8bf7a;
-  font-size: .85rem;
-}
-
-#login-open:hover { color: #fffdf6; }
-
-#login-form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  max-width: 430px;
-  margin: 0 auto;
-  padding: 18px;
-  border: 1px solid rgba(244, 239, 226, .16);
-  border-radius: var(--r-md);
-  background: rgba(0, 0, 0, .18);
-}
-
-#login-pw {
-  flex: 1 1 150px;
-  min-width: 0;
-  padding: 9px 13px;
-  border-color: rgba(244, 239, 226, .22);
-  background: rgba(247, 242, 231, .94);
-}
-
-#login-form .linkish { color: #b9cfae; }
-#login-form .linkish:hover { color: #fffdf6; }
-
-.login-msg {
-  flex: 1 1 100%;
-  margin: 2px 0 0;
-  font-size: .84rem;
-  color: var(--on-dark-soft);
-}
-
-.login-msg:empty { display: none; }
-
-.login-msg.error { color: #f0a49c; }
 
 /* ---------- 18. Schmale Bildschirme ------------------------- */
 
@@ -1400,6 +1632,18 @@ footer small {
   .admin-row { flex: 1 1 100%; }
 }
 
+@media (max-width: 860px) {
+  .topbar-inner { gap: 10px 16px; }
+  .brand-name { font-size: 1.2rem; }
+  .topnav { gap: 8px 16px; width: 100%; }
+  .hero::before {
+    background: linear-gradient(178deg,
+      rgba(250, 246, 236, .96) 0%, rgba(250, 246, 236, .9) 46%,
+      rgba(250, 246, 236, .55) 70%, rgba(250, 246, 236, .1) 100%);
+  }
+  .hero-script { display: none; }
+}
+
 @media (max-width: 720px) {
   .row { grid-template-columns: 1fr; }
 
@@ -1409,15 +1653,6 @@ footer small {
   .summary { gap: 8px; }
 
   .stat { padding: 14px 6px 12px; }
-
-  .adminbar {
-    align-items: stretch;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .adminbar-actions > .primary,
-  .adminbar-actions > .ghost { flex: 1 1 auto; }
 
   .toolbar { justify-content: stretch; }
 
@@ -1430,8 +1665,39 @@ footer small {
   .lock-line .primary { flex: 1 1 auto; }
 }
 
+@media (max-width: 620px) {
+  /* Statuspille läuft in den Fluss, damit sie nie neben den Titel gerät */
+  .wish { padding-top: 16px; }
+
+  .wish:not(.taken)::after {
+    position: static;
+    order: -1;
+    grid-row: 1;
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  /* Nur bei offenen Zeilen steht die Statuspille in Zeile 1 – dort rückt
+     das Bild eine Zeile nach unten. Vergebene Zeilen bleiben unverändert. */
+  .wish:not(.taken) .thumb,
+  .wish:not(.taken).no-image::before { grid-row: 2; }
+
+  .badge { position: static; }
+
+  .summary { grid-template-columns: 1fr; }
+  .stat { flex-direction: row; align-items: center; gap: 14px; padding: 14px 16px; }
+  .stat-icon { margin-bottom: 0; }
+  .stat-num { min-width: 2ch; }
+  .stat-label { flex: 1 1 auto; }
+  .footer-inner { justify-content: center; text-align: center; }
+  .footer-script { text-align: center; width: 100%; }
+  .adminbox { padding: 18px 18px 18px 30px; }
+  .adminbox-action, #login-form { width: 100%; }
+  #login-pw { flex: 1 1 100%; }
+}
+
 @media (max-width: 480px) {
-  .wish { gap: 10px 14px; padding: 14px; }
+  .wish { gap: 10px 14px; padding: 16px 14px 14px; }
 
   .wish { grid-template-columns: 68px minmax(0, 1fr); }
 
@@ -1499,11 +1765,12 @@ footer small {
 /* ---------- 21. Druck --------------------------------------- */
 
 @media print {
-  .motes, .hero-scene, .ausklang, .toolbar, .adminbar, .panel, .login { display: none !important; }
+  .motes, .drop, .putt, .hero-scene, .hero-photo, .hero-script, .ausklang,
+  .toolbar, .topbar, .panel, .login { display: none !important; }
 
   body { background: #fff; }
 
-  .hero { background: none; color: #000; padding: 0 0 16px; }
+  .hero { background: none; color: #000; min-height: 0; padding: 0 0 16px; }
 
   .hero h1 { color: #000; }
 

@@ -5,67 +5,79 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Davids Wunschliste</title>
 <meta name="description" content="Davids Wunschliste – wer etwas schenkt, hakt es hier ab, damit niemand doppelt kauft.">
-<meta name="theme-color" content="#f7f1e9">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
+<meta name="theme-color" content="#14301f">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛳</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap">
-<link rel="stylesheet" href="css/style.css?v=25">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap">
+<link rel="stylesheet" href="css/style.css?v=26">
 </head>
 <body>
 
-<div class="page-art" aria-hidden="true">
-  <picture>
-    <source media="(max-width: 640px)" type="image/webp" srcset="assets/wandbild-hoch.webp">
-    <source media="(max-width: 640px)" srcset="assets/wandbild-hoch.jpg">
-    <source type="image/webp"
-            srcset="assets/wandbild-small.webp 1100w, assets/wandbild.webp 1800w"
-            sizes="100vw">
-    <img src="assets/wandbild.jpg"
-         srcset="assets/wandbild-small.jpg 1100w, assets/wandbild.jpg 1800w"
-         sizes="100vw"
-         fetchpriority="high" decoding="async" alt="">
-  </picture>
-</div>
-
-<div class="bubbles" aria-hidden="true">
-  <span style="--x:2.5%; --s:11.5px; --dur:19.1s; --d:-12.4s; --drift:-22px"></span>
-  <span style="--x:5%; --s:14.5px; --dur:22.1s; --d:-1.3s; --drift:0px"></span>
-  <span style="--x:7.5%; --s:7.5px; --dur:23.1s; --d:-1.6s; --drift:-21px"></span>
-  <span style="--x:10.5%; --s:12.9px; --dur:28.6s; --d:-3.5s; --drift:-14px"></span>
-  <span style="--x:13.5%; --s:15.8px; --dur:30.3s; --d:-17.5s; --drift:-5px"></span>
-  <span style="--x:16.5%; --s:20.7px; --dur:17.7s; --d:-15.2s; --drift:-11px"></span>
-  <span style="--x:19.5%; --s:9.0px; --dur:18.6s; --d:-5.7s; --drift:16px"></span>
-  <span style="--x:22%; --s:9.5px; --dur:25.1s; --d:-16.0s; --drift:-7px"></span>
-  <span style="--x:78%; --s:14.7px; --dur:17.9s; --d:-1.1s; --drift:-15px"></span>
-  <span style="--x:80.5%; --s:16.5px; --dur:23.0s; --d:-7.2s; --drift:4px"></span>
-  <span style="--x:83.5%; --s:13.3px; --dur:21.2s; --d:-16.8s; --drift:10px"></span>
-  <span style="--x:86.5%; --s:10.4px; --dur:25.0s; --d:-13.1s; --drift:20px"></span>
-  <span style="--x:89.5%; --s:17.2px; --dur:21.0s; --d:-20.6s; --drift:-20px"></span>
-  <span style="--x:92.5%; --s:12.9px; --dur:27.6s; --d:-4.2s; --drift:-1px"></span>
-  <span style="--x:95%; --s:7.5px; --dur:26.4s; --d:-20.2s; --drift:4px"></span>
-  <span style="--x:97.5%; --s:19.3px; --dur:21.4s; --d:-14.9s; --drift:5px"></span>
-  <span style="--x:31%; --s:15.1px; --dur:23.4s; --d:-19.7s; --drift:23px"></span>
-  <span style="--x:42%; --s:13.6px; --dur:26.3s; --d:-1.6s; --drift:10px"></span>
-  <span style="--x:54%; --s:16.1px; --dur:30.9s; --d:-25.4s; --drift:-11px"></span>
-  <span style="--x:66%; --s:12.4px; --dur:26.4s; --d:-0.6s; --drift:-2px"></span>
+<!-- Dekorative Ebene: langsam schwebende Golfbälle, ein paar Tees und
+     vereinzelt ein Tennis- oder Fußball. Rein visuell, aria-hidden,
+     liegt hinter allen Inhalten und fängt keine Klicks ab. -->
+<div class="motes" aria-hidden="true">
+  <span class="mote ball"   style="--x:3%;    --s:16px; --dur:64s; --d:-8s;  --drift:-26px"></span>
+  <span class="mote ball"   style="--x:8.5%;  --s:10px; --dur:78s; --d:-31s; --drift:18px"></span>
+  <span class="mote tee"    style="--x:13%;   --s:20px; --dur:86s; --d:-52s; --drift:-12px; --rot:-14deg"></span>
+  <span class="mote ball"   style="--x:18%;   --s:22px; --dur:71s; --d:-17s; --drift:22px"></span>
+  <span class="mote ball"   style="--x:24%;   --s:12px; --dur:92s; --d:-64s; --drift:-9px"></span>
+  <span class="mote tennis" style="--x:30%;   --s:15px; --dur:84s; --d:-40s; --drift:16px"></span>
+  <span class="mote ball"   style="--x:36%;   --s:18px; --dur:69s; --d:-25s; --drift:-18px"></span>
+  <span class="mote ball"   style="--x:43%;   --s:11px; --dur:88s; --d:-57s; --drift:12px"></span>
+  <span class="mote ball"   style="--x:50%;   --s:14px; --dur:76s; --d:-11s; --drift:-20px"></span>
+  <span class="mote tee"    style="--x:57%;   --s:17px; --dur:95s; --d:-70s; --drift:9px;   --rot:22deg"></span>
+  <span class="mote ball"   style="--x:63%;   --s:20px; --dur:66s; --d:-35s; --drift:24px"></span>
+  <span class="mote ball"   style="--x:69%;   --s:13px; --dur:82s; --d:-6s;  --drift:-14px"></span>
+  <span class="mote football" style="--x:75%; --s:16px; --dur:90s; --d:-47s; --drift:10px"></span>
+  <span class="mote ball"   style="--x:81%;   --s:17px; --dur:73s; --d:-21s; --drift:-23px"></span>
+  <span class="mote ball"   style="--x:87%;   --s:11px; --dur:94s; --d:-61s; --drift:15px"></span>
+  <span class="mote tee"    style="--x:92%;   --s:19px; --dur:80s; --d:-29s; --drift:-11px; --rot:8deg"></span>
+  <span class="mote ball"   style="--x:96.5%; --s:15px; --dur:68s; --d:-44s; --drift:20px"></span>
 </div>
 
 <header class="hero">
-  <div class="hero-text">
-    <h1>Davids Wünsche</h1>
-    <p class="lede">Wähle einen Wunsch aus und reserviere ihn mit einem kurzen Passwort.
-      Damit kannst du ihn später wieder aufheben. David sieht nicht, wer welchen
-      Wunsch auswählt.</p>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="40" height="40" role="presentation" focusable="false">
+          <circle cx="20" cy="20" r="19" fill="#f6f1e4" fill-opacity=".12" stroke="#cdb98a" stroke-width="1.2"/>
+          <path d="M15 30V11l11 4-11 4" fill="#a8bf7a" stroke="#f6f1e4" stroke-width="1.4" stroke-linejoin="round"/>
+          <circle cx="15" cy="30" r="2.2" fill="#f6f1e4"/>
+        </svg>
+      </span>
+      <h1>Davids Wünsche</h1>
+      <p class="lede">Wähle einen Wunsch aus und reserviere ihn mit einem kurzen Passwort.
+        Damit kannst du ihn später wieder aufheben. David sieht nicht, wer welchen
+        Wunsch auswählt.</p>
+    </div>
   </div>
+
+  <!-- Schottische Hügel und Fairway als ruhige Silhouette -->
+  <div class="hero-scene" aria-hidden="true">
+    <svg viewBox="0 0 1440 220" preserveAspectRatio="none" role="presentation" focusable="false">
+      <path class="hill hill-far"  d="M0 150 C 180 92, 300 132, 470 110 C 640 88, 760 128, 940 104 C 1120 80, 1290 126, 1440 100 L1440 220 L0 220 Z"/>
+      <path class="hill hill-mid"  d="M0 176 C 210 130, 380 168, 560 148 C 740 128, 900 170, 1090 148 C 1250 130, 1350 164, 1440 150 L1440 220 L0 220 Z"/>
+      <path class="hill hill-near" d="M0 202 C 240 172, 430 200, 640 186 C 850 172, 1040 202, 1240 188 C 1340 181, 1400 192, 1440 188 L1440 220 L0 220 Z"/>
+      <g class="hero-flag">
+        <path d="M1146 188V126" stroke="#f6f1e4" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M1146 128l30 9-30 9z" fill="#8f2f28"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="tartan-band" aria-hidden="true"></div>
 </header>
 
-<main>
+<main class="wrap">
 
   <div class="adminbar" id="adminbar" hidden>
     <span class="adminbar-label">Admin-Modus</span>
-    <button class="primary small" id="admin-toggle" type="button">Wunsch hinzufügen</button>
-    <button class="ghost small" id="logout" type="button">Abmelden</button>
+    <div class="adminbar-actions">
+      <button class="primary small" id="admin-toggle" type="button">Wunsch hinzufügen</button>
+      <button class="ghost small" id="logout" type="button">Abmelden</button>
+    </div>
   </div>
 
   <section class="panel" id="admin-panel" hidden>
@@ -113,10 +125,6 @@
 
   <div class="notice" id="notice" role="status" aria-live="polite" hidden></div>
 
-  <section id="list" class="list" aria-label="Wunschliste"></section>
-
-  <p class="empty" id="empty" hidden>Noch keine Wünsche eingetragen.</p>
-
   <section class="summary reveal" id="stats" hidden aria-label="Übersicht">
     <div class="stat"><span class="stat-num" id="stat-total">0</span><span class="stat-label">Wünsche</span></div>
     <div class="stat"><span class="stat-num" id="stat-open">0</span><span class="stat-label">noch offen</span></div>
@@ -129,6 +137,10 @@
       <span>Vergebene ausblenden</span>
     </label>
   </div>
+
+  <section id="list" class="list" aria-label="Wunschliste"></section>
+
+  <p class="empty" id="empty" hidden>Noch keine Wünsche eingetragen.</p>
 
 </main>
 
@@ -150,7 +162,7 @@
   </div>
 </footer>
 
-<script src="js/config.js?v=25"></script>
-<script src="js/app.js?v=25"></script>
+<script src="js/config.js?v=26"></script>
+<script src="js/app.js?v=26"></script>
 </body>
 </html>

@@ -28,7 +28,7 @@ create table if not exists public.app_secret (
 -- Ersetze HIER-DEIN-PASSWORT durch dein eigenes Passwort.
 
 insert into public.app_secret (id, password_hash)
-values (1, extensions.crypt('HIER-DEIN-PASSWORT', extensions.gen_salt('bf')))
+values (1, extensions.crypt('David', extensions.gen_salt('bf')))
 on conflict (id) do update
   set password_hash = excluded.password_hash;
 

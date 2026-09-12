@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Davids Wunschliste</title>
+<meta name="description" content="Davids Wunschliste – wer etwas schenkt, hakt es hier ab, damit niemand doppelt kauft.">
+<meta name="theme-color" content="#f7f1e9">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="css/style.css?v=25">
+</head>
+<body>
+
+<div class="page-art" aria-hidden="true">
+  <picture>
+    <source media="(max-width: 640px)" type="image/webp" srcset="assets/wandbild-hoch.webp">
+    <source media="(max-width: 640px)" srcset="assets/wandbild-hoch.jpg">
+    <source type="image/webp"
+            srcset="assets/wandbild-small.webp 1100w, assets/wandbild.webp 1800w"
+            sizes="100vw">
+    <img src="assets/wandbild.jpg"
+         srcset="assets/wandbild-small.jpg 1100w, assets/wandbild.jpg 1800w"
+         sizes="100vw"
+         fetchpriority="high" decoding="async" alt="">
+  </picture>
+</div>
+
+<div class="bubbles" aria-hidden="true">
+  <span style="--x:2.5%; --s:11.5px; --dur:19.1s; --d:-12.4s; --drift:-22px"></span>
+  <span style="--x:5%; --s:14.5px; --dur:22.1s; --d:-1.3s; --drift:0px"></span>
+  <span style="--x:7.5%; --s:7.5px; --dur:23.1s; --d:-1.6s; --drift:-21px"></span>
+  <span style="--x:10.5%; --s:12.9px; --dur:28.6s; --d:-3.5s; --drift:-14px"></span>
+  <span style="--x:13.5%; --s:15.8px; --dur:30.3s; --d:-17.5s; --drift:-5px"></span>
+  <span style="--x:16.5%; --s:20.7px; --dur:17.7s; --d:-15.2s; --drift:-11px"></span>
+  <span style="--x:19.5%; --s:9.0px; --dur:18.6s; --d:-5.7s; --drift:16px"></span>
+  <span style="--x:22%; --s:9.5px; --dur:25.1s; --d:-16.0s; --drift:-7px"></span>
+  <span style="--x:78%; --s:14.7px; --dur:17.9s; --d:-1.1s; --drift:-15px"></span>
+  <span style="--x:80.5%; --s:16.5px; --dur:23.0s; --d:-7.2s; --drift:4px"></span>
+  <span style="--x:83.5%; --s:13.3px; --dur:21.2s; --d:-16.8s; --drift:10px"></span>
+  <span style="--x:86.5%; --s:10.4px; --dur:25.0s; --d:-13.1s; --drift:20px"></span>
+  <span style="--x:89.5%; --s:17.2px; --dur:21.0s; --d:-20.6s; --drift:-20px"></span>
+  <span style="--x:92.5%; --s:12.9px; --dur:27.6s; --d:-4.2s; --drift:-1px"></span>
+  <span style="--x:95%; --s:7.5px; --dur:26.4s; --d:-20.2s; --drift:4px"></span>
+  <span style="--x:97.5%; --s:19.3px; --dur:21.4s; --d:-14.9s; --drift:5px"></span>
+  <span style="--x:31%; --s:15.1px; --dur:23.4s; --d:-19.7s; --drift:23px"></span>
+  <span style="--x:42%; --s:13.6px; --dur:26.3s; --d:-1.6s; --drift:10px"></span>
+  <span style="--x:54%; --s:16.1px; --dur:30.9s; --d:-25.4s; --drift:-11px"></span>
+  <span style="--x:66%; --s:12.4px; --dur:26.4s; --d:-0.6s; --drift:-2px"></span>
+</div>
+
+<header class="hero">
+  <div class="hero-text">
+    <h1>Davids Wünsche</h1>
+    <p class="lede">Wähle einen Wunsch aus und reserviere ihn mit einem kurzen Passwort.
+      Damit kannst du ihn später wieder aufheben. David sieht nicht, wer welchen
+      Wunsch auswählt.</p>
+  </div>
+</header>
+
+<main>
+
+  <div class="adminbar" id="adminbar" hidden>
+    <span class="adminbar-label">Admin-Modus</span>
+    <button class="primary small" id="admin-toggle" type="button">Wunsch hinzufügen</button>
+    <button class="ghost small" id="logout" type="button">Abmelden</button>
+  </div>
+
+  <section class="panel" id="admin-panel" hidden>
+    <h2 id="form-heading">Neuer Wunsch</h2>
+    <form id="wish-form" autocomplete="off">
+      <input type="hidden" id="edit-id">
+      <div class="field">
+        <label for="f-title">Artikel <span class="req">*</span></label>
+        <input id="f-title" name="title" type="text" required maxlength="140" placeholder="z. B. Kaschmirschal, beige">
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="f-price">Preis (ca.) <span class="hint">(€ kommt automatisch)</span></label>
+          <input id="f-price" name="price" type="text" maxlength="40" placeholder="49">
+        </div>
+        <div class="field grow">
+          <label for="f-link">Link zum Shop <span class="hint">(Bild wird daraus geholt)</span></label>
+          <input id="f-link" name="link" type="url" maxlength="600" placeholder="https://…">
+        </div>
+      </div>
+
+      <div class="imgstatus" id="image-status" hidden>
+        <img id="image-preview" alt="" hidden>
+        <span id="image-status-text"></span>
+        <button type="button" class="linkish" id="image-manual">Bild selbst angeben</button>
+      </div>
+
+      <div class="field">
+        <label for="f-note">Bemerkung <span class="hint">(z. B. Größe 86, Farbe rosé)</span></label>
+        <input id="f-note" name="note" type="text" maxlength="200" placeholder="Größe 86">
+      </div>
+
+      <div class="field" id="image-row" hidden>
+        <label for="f-image">Bild-URL <span class="hint">(Rechtsklick aufs Produktbild → „Bildadresse kopieren")</span></label>
+        <input id="f-image" name="image_url" type="url" maxlength="600" placeholder="https://…jpg">
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="primary" id="submit-btn">Hinzufügen</button>
+        <button type="button" class="ghost" id="cancel-edit" hidden>Abbrechen</button>
+        <span class="form-msg" id="form-msg" role="status" aria-live="polite"></span>
+      </div>
+    </form>
+  </section>
+
+  <div class="notice" id="notice" role="status" aria-live="polite" hidden></div>
+
+  <section id="list" class="list" aria-label="Wunschliste"></section>
+
+  <p class="empty" id="empty" hidden>Noch keine Wünsche eingetragen.</p>
+
+  <section class="summary reveal" id="stats" hidden aria-label="Übersicht">
+    <div class="stat"><span class="stat-num" id="stat-total">0</span><span class="stat-label">Wünsche</span></div>
+    <div class="stat"><span class="stat-num" id="stat-open">0</span><span class="stat-label">noch offen</span></div>
+    <div class="stat"><span class="stat-num" id="stat-taken">0</span><span class="stat-label">vergeben</span></div>
+  </section>
+
+  <div class="toolbar reveal" id="toolbar" hidden>
+    <label class="switch">
+      <input type="checkbox" id="hide-taken">
+      <span>Vergebene ausblenden</span>
+    </label>
+  </div>
+
+</main>
+
+<div class="ausklang" aria-hidden="true"></div>
+
+<footer>
+  <span class="shell-divider" aria-hidden="true"></span>
+  <small>Reservierungen sind anonym</small>
+
+  <div class="login" id="login">
+    <button type="button" class="linkish" id="login-open">Verwalten</button>
+    <form id="login-form" hidden autocomplete="off">
+      <label class="sr-only" for="login-pw">Passwort</label>
+      <input id="login-pw" type="password" placeholder="Passwort" autocomplete="current-password">
+      <button type="submit" class="primary small">Anmelden</button>
+      <button type="button" class="linkish" id="login-cancel">Abbrechen</button>
+      <p class="login-msg" id="login-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</footer>
+
+<script src="js/config.js?v=25"></script>
+<script src="js/app.js?v=25"></script>
+</body>
+</html>

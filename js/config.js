@@ -9,6 +9,6 @@
 ------------------------------------------------------------------- */
 
 window.WUNSCHLISTE_CONFIG = {
-  SUPABASE_URL:      "https://drxzzuzyquuaeaccvymp.supabase.co",   // z. B. https://abcdefgh.supabase.co
-  SUPABASE_ANON_KEY: "sb_publishable_I-sl6U6lOtDKWtbXMLf5jA_-IHEINfe"
+  SUPABASE_URL:      "https://yxbeonaqussvgnmagmrp.supabase.co",   // z. B. https://abcdefgh.supabase.co
+  SUPABASE_ANON_KEY: "sb_publishable_Pr9xWgpAcfZwwsNzcA4buQ_hLw9d6Tj"
 };

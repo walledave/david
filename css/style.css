@@ -243,7 +243,11 @@ img { max-width: 100%; }
   padding: 0 var(--gutter) clamp(60px, 12vw, 128px);
 }
 
-.hero-text { max-width: 46rem; }
+.hero-text {
+  max-width: 46rem;
+  margin-inline: auto;
+  text-align: center;
+}
 
 .hero-mark {
   display: inline-flex;
@@ -262,13 +266,13 @@ img { max-width: 100%; }
   display: block;
   width: 84px;
   height: 3px;
-  margin-top: 22px;
+  margin: 22px auto 0;
   border-radius: 2px;
   background: linear-gradient(90deg, var(--claret-soft) 0 34%, #cdb98a 34% 68%, var(--thistle) 68% 100%);
 }
 
 .lede {
-  margin: 22px 0 0;
+  margin: 22px auto 0;
   max-width: 40rem;
   font-size: clamp(1.02rem, 1.6vw, 1.16rem);
   line-height: 1.68;

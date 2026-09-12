@@ -10,70 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap">
-<link rel="stylesheet" href="css/style.css?v=27">
+<link rel="stylesheet" href="css/style.css?v=28">
 </head>
 <body id="top">
-
-<!-- Beim Scrollen rollt ein Ball über den unteren Bildschirmrand auf
-     Loch 18 zu und fällt am Ende der Seite ein. Rein dekorativ, ohne
-     JavaScript: die Animation hängt direkt am Scrollfortschritt. -->
-<div class="putt" aria-hidden="true">
-  <span class="putt-flag">
-    <svg viewBox="0 0 56 96" width="56" height="96" role="presentation" focusable="false">
-      <ellipse cx="20" cy="88" rx="15" ry="5" fill="#0a1d12" opacity=".55"/>
-      <ellipse cx="20" cy="86" rx="11" ry="3.6" fill="#09150d"/>
-      <ellipse cx="20" cy="85" rx="11" ry="3.6" fill="none" stroke="#e9e1cb" stroke-width="1" opacity=".5"/>
-      <path d="M20 86V10" stroke="#f4efe2" stroke-width="2.6" stroke-linecap="round"/>
-      <path d="M20 86V10" stroke="#0a1d12" stroke-width=".8" stroke-dasharray="9 9" opacity=".35"/>
-      <path d="M20 11h30l-8 10 8 10H20z" fill="#8f2f28"/>
-      <path d="M20 11h30l-8 10 8 10H20z" fill="none" stroke="#5d1c17" stroke-width=".9"/>
-      <text x="31" y="25" font-family="Inter, sans-serif" font-size="11" font-weight="700"
-            fill="#f7f1e2" text-anchor="middle">18</text>
-    </svg>
-  </span>
-  <span class="putt-line"></span>
-  <span class="putt-ball ball"></span>
-</div>
-
-<!-- Einmalige Begrüßung: beim Öffnen der Seite fallen Bälle herein,
-     springen einmal auf und verschwinden wieder. Rein dekorativ. -->
-<div class="drop" aria-hidden="true">
-  <span class="ball"     style="--x:7%;  --s:26px; --dur:2.1s; --d:.05s; --drift:14px;  --spin:420deg"></span>
-  <span class="ball"     style="--x:16%; --s:18px; --dur:2.4s; --d:.42s; --drift:-9px;  --spin:-300deg"></span>
-  <span class="football" style="--x:24%; --s:30px; --dur:2.2s; --d:.68s; --drift:18px;  --spin:340deg"></span>
-  <span class="ball"     style="--x:33%; --s:22px; --dur:2.5s; --d:.18s; --drift:-16px; --spin:380deg"></span>
-  <span class="tee"      style="--x:41%; --s:24px; --dur:2.3s; --d:.95s; --drift:11px;  --spin:520deg"></span>
-  <span class="ball"     style="--x:49%; --s:28px; --dur:2.0s; --d:.55s; --drift:-12px; --spin:-360deg"></span>
-  <span class="ball"     style="--x:57%; --s:16px; --dur:2.6s; --d:.3s;  --drift:15px;  --spin:300deg"></span>
-  <span class="tennis"   style="--x:65%; --s:24px; --dur:2.3s; --d:.8s;  --drift:-14px; --spin:400deg"></span>
-  <span class="ball"     style="--x:73%; --s:24px; --dur:2.2s; --d:.12s; --drift:10px;  --spin:-420deg"></span>
-  <span class="ball"     style="--x:81%; --s:19px; --dur:2.5s; --d:.62s; --drift:-17px; --spin:360deg"></span>
-  <span class="tee"      style="--x:88%; --s:21px; --dur:2.4s; --d:1.05s; --drift:8px;  --spin:-480deg"></span>
-  <span class="ball"     style="--x:94%; --s:27px; --dur:2.1s; --d:.35s; --drift:-11px; --spin:400deg"></span>
-</div>
-
-<!-- Dekorative Ebene: langsam schwebende Golfbälle, ein paar Tees und
-     vereinzelt ein Tennis- oder Fußball. Rein visuell, aria-hidden,
-     liegt hinter allen Inhalten und fängt keine Klicks ab. -->
-<div class="motes" aria-hidden="true">
-  <span class="mote ball"   style="--x:3%;    --s:16px; --dur:64s; --d:-8s;  --drift:-26px"></span>
-  <span class="mote ball"   style="--x:8.5%;  --s:10px; --dur:78s; --d:-31s; --drift:18px"></span>
-  <span class="mote tee"    style="--x:13%;   --s:20px; --dur:86s; --d:-52s; --drift:-12px; --rot:-14deg"></span>
-  <span class="mote ball"   style="--x:18%;   --s:22px; --dur:71s; --d:-17s; --drift:22px"></span>
-  <span class="mote ball"   style="--x:24%;   --s:12px; --dur:92s; --d:-64s; --drift:-9px"></span>
-  <span class="mote tennis" style="--x:30%;   --s:15px; --dur:84s; --d:-40s; --drift:16px"></span>
-  <span class="mote ball"   style="--x:36%;   --s:18px; --dur:69s; --d:-25s; --drift:-18px"></span>
-  <span class="mote ball"   style="--x:43%;   --s:11px; --dur:88s; --d:-57s; --drift:12px"></span>
-  <span class="mote ball"   style="--x:50%;   --s:14px; --dur:76s; --d:-11s; --drift:-20px"></span>
-  <span class="mote tee"    style="--x:57%;   --s:17px; --dur:95s; --d:-70s; --drift:9px;   --rot:22deg"></span>
-  <span class="mote ball"   style="--x:63%;   --s:20px; --dur:66s; --d:-35s; --drift:24px"></span>
-  <span class="mote ball"   style="--x:69%;   --s:13px; --dur:82s; --d:-6s;  --drift:-14px"></span>
-  <span class="mote football" style="--x:75%; --s:16px; --dur:90s; --d:-47s; --drift:10px"></span>
-  <span class="mote ball"   style="--x:81%;   --s:17px; --dur:73s; --d:-21s; --drift:-23px"></span>
-  <span class="mote ball"   style="--x:87%;   --s:11px; --dur:94s; --d:-61s; --drift:15px"></span>
-  <span class="mote tee"    style="--x:92%;   --s:19px; --dur:80s; --d:-29s; --drift:-11px; --rot:8deg"></span>
-  <span class="mote ball"   style="--x:96.5%; --s:15px; --dur:68s; --d:-44s; --drift:20px"></span>
-</div>
 
 <section class="hero">
   <!-- Wenn assets/hero.jpg vorhanden ist, liegt das Foto hier oben auf.
@@ -359,43 +298,22 @@
 
 </main>
 
-<div class="ausklang" aria-hidden="true"></div>
-
 <footer>
-  <span class="footer-tartan" aria-hidden="true"></span>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <svg class="clubs" viewBox="0 0 44 36" width="44" height="36" role="presentation" focusable="false" aria-hidden="true">
-        <g stroke="currentColor" stroke-width="2.3" stroke-linecap="round" fill="none">
-          <path d="M11 4.5 27 26"/>
-          <path d="M33 4.5 17 26"/>
-        </g>
-        <path d="M26.4 25.1l7 1.9c1.2.3 1.4 2 .3 2.6l-5.6 3c-1 .5-2.2-.1-2.4-1.2l-.7-4.6c-.1-1 .5-1.9 1.4-1.7z" fill="currentColor"/>
-        <path d="M17.6 25.1l-7 1.9c-1.2.3-1.4 2-.3 2.6l5.6 3c1 .5 2.2-.1 2.4-1.2l.7-4.6c.1-1-.5-1.9-1.4-1.7z" fill="currentColor"/>
-        <circle cx="22" cy="9.4" r="2.6" fill="currentColor" opacity=".85"/>
-      </svg>
-      <div>
-        <strong>Davids Wünsche</strong>
-        <small>Reservierungen sind anonym</small>
-      </div>
-    </div>
-
-    <div class="login" id="login">
-      <button type="button" class="linkish" id="login-open">Verwalten</button>
-      <form id="login-form" hidden autocomplete="off">
-        <label class="sr-only" for="login-pw">Passwort</label>
-        <input id="login-pw" type="password" placeholder="Passwort" autocomplete="current-password">
-        <button type="submit" class="primary small">Anmelden</button>
-        <button type="button" class="linkish" id="login-cancel">Abbrechen</button>
-        <p class="login-msg" id="login-msg" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-
-    <span class="footer-script" aria-hidden="true">Life is better<br>on the green</span>
+  <div class="login" id="login">
+    <button type="button" class="linkish" id="login-open">Verwalten</button>
+    <form id="login-form" hidden autocomplete="off">
+      <label class="sr-only" for="login-pw">Passwort</label>
+      <input id="login-pw" type="password" placeholder="Passwort" autocomplete="current-password">
+      <button type="submit" class="primary small">Anmelden</button>
+      <button type="button" class="linkish" id="login-cancel">Abbrechen</button>
+      <p class="login-msg" id="login-msg" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </footer>
 
-<script src="js/config.js?v=27"></script>
-<script src="js/app.js?v=27"></script>
+<div class="tartan-band" aria-hidden="true"></div>
+
+<script src="js/config.js?v=28"></script>
+<script src="js/app.js?v=28"></script>
 </body>
 </html>

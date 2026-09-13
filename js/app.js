@@ -82,6 +82,7 @@
   var lastJson = "";
   var admin = false;
   var pw = "";
+  var activeSupported = true;   // wird false, wenn migration-03.sql fehlt
 
   /* ---------- Speicher ---------- */
 
@@ -483,16 +484,18 @@
       del.textContent = "Löschen";
       del.addEventListener("click", function () { onDelete(w); });
 
-      var act = document.createElement("button");
-      act.type = "button";
-      act.className = "icon-btn toggle-active";
-      act.textContent = isOff(w) ? "Aktivieren" : "Ausblenden";
-      act.title = isOff(w)
-        ? "Wunsch wieder für Gäste sichtbar machen"
-        : "Wunsch behalten, aber für Gäste ausblenden";
-      act.addEventListener("click", function () { onToggleActive(w); });
+      if (activeSupported) {
+        var act = document.createElement("button");
+        act.type = "button";
+        act.className = "icon-btn toggle-active";
+        act.textContent = isOff(w) ? "Aktivieren" : "Ausblenden";
+        act.title = isOff(w)
+          ? "Wunsch wieder für Gäste sichtbar machen"
+          : "Wunsch behalten, aber für Gäste ausblenden";
+        act.addEventListener("click", function () { onToggleActive(w); });
+        row.appendChild(act);
+      }
 
-      row.appendChild(act);
       row.appendChild(edit);
       row.appendChild(del);
 
@@ -643,29 +646,51 @@
 
   /* ---------- Daten ---------- */
 
-  // Gäste lesen direkt aus der Tabelle – die Policy liefert ihnen nur
-  // aktive Wünsche. Der Admin holt die volle Liste über eine Funktion,
-  // die vorher sein Passwort prüft.
-  function load() {
-    var request = admin
-      ? rpc("admin_list_wishes", { pw: pw })
-      : api("wishes?select=*&order=reserved.asc,created_at.desc");
+  function applyRows(rows) {
+    var json = JSON.stringify(rows);
+    wishes = rows || [];
+    el.toolbar.hidden = false;
+    el.notice.hidden = true;
+    if (json !== lastJson) { lastJson = json; render(); }
+    revealScan();
+  }
 
-    return request
-      .then(function (rows) {
-        var json = JSON.stringify(rows);
-        wishes = rows || [];
-        el.toolbar.hidden = false;
-        el.notice.hidden = true;
-        if (json !== lastJson) { lastJson = json; render(); }
-        revealScan();
-      })
+  // Gäste lesen direkt aus der Tabelle – die Policy liefert ihnen nur
+  // aktive Wünsche.
+  function loadPublic() {
+    return api("wishes?select=*&order=reserved.asc,created_at.desc").then(applyRows);
+  }
+
+  function loadFailed(err) {
+    el.list.textContent = "";
+    el.empty.hidden = true;
+    showNotice("<strong>Die Liste konnte nicht geladen werden.</strong><br>" +
+      escapeHtml(err.message));
+  }
+
+  // Der Admin holt die volle Liste über eine Funktion, die vorher sein
+  // Passwort prüft. Fehlt diese Funktion noch (migration-03.sql nicht
+  // ausgeführt), fällt der Admin-Modus auf die normale Liste zurück –
+  // dann fehlt nur der Schalter, die Seite bleibt bedienbar. Sobald die
+  // Migration durch ist, greift beim nächsten Laden wieder der Vollzugriff.
+  function load() {
+    if (!admin) return loadPublic().catch(loadFailed);
+
+    return rpc("admin_list_wishes", { pw: pw })
+      .then(function (rows) { activeSupported = true; applyRows(rows); })
       .catch(function (err) {
-        el.list.textContent = "";
-        el.empty.hidden = true;
-        showNotice("<strong>Die Liste konnte nicht geladen werden.</strong><br>" +
-          escapeHtml(err.message));
-      });
+        var m = err.message || "";
+        if (!/admin_list_wishes|schema cache/i.test(m)) throw err;
+
+        activeSupported = false;
+        lastJson = "";
+        return loadPublic().then(function () {
+          showNotice("<strong>Das Aus- und Einblenden ist noch nicht eingerichtet.</strong><br>" +
+            "Führe <code>supabase/migration-03.sql</code> im SQL Editor aus, " +
+            "dann erscheint der Schalter in jeder Zeile.");
+        });
+      })
+      .catch(loadFailed);
   }
 
   function onDelete(w) {

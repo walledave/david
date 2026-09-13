@@ -156,10 +156,14 @@
     return isFinite(v) ? v : null;
   }
 
-  // Offene zuerst, innerhalb jeder Gruppe teuerster Wunsch oben.
-  // Wünsche ohne Preisangabe stehen am Ende ihrer Gruppe.
+  // Inaktive ganz nach unten (sieht nur der Admin), dann offene zuerst,
+  // innerhalb jeder Gruppe teuerster Wunsch oben. Wünsche ohne
+  // Preisangabe stehen am Ende ihrer Gruppe.
+  function isOff(w) { return w.active === false; }
+
   function sortWishes(list) {
     return list.slice().sort(function (a, b) {
+      if (isOff(a) !== isOff(b)) return isOff(a) ? 1 : -1;
       if (a.reserved !== b.reserved) return a.reserved ? 1 : -1;
       var pa = priceValue(a.price), pb = priceValue(b.price);
       if (pa === null && pb === null) return (b.created_at || "").localeCompare(a.created_at || "");
@@ -317,7 +321,8 @@
     storePw(password);
     el.adminbar.hidden = false;
     el.login.hidden = true;
-    render();
+    lastJson = "";
+    load();
   }
 
   function leaveAdmin() {
@@ -331,7 +336,8 @@
     el.loginOpen.hidden = false;
     el.loginPw.value = "";
     el.loginMsg.textContent = "";
-    render();
+    lastJson = "";
+    load();
   }
 
   el.loginOpen.addEventListener("click", function () {
@@ -375,10 +381,12 @@
 
   /* ---------- Rendern ---------- */
 
+  // Gezählt wird, was Gäste sehen: die aktiven Wünsche.
   function renderStats() {
-    var taken = wishes.filter(function (w) { return w.reserved; }).length;
-    el.total.textContent = wishes.length;
-    el.open.textContent = wishes.length - taken;
+    var live = wishes.filter(function (w) { return !isOff(w); });
+    var taken = live.filter(function (w) { return w.reserved; }).length;
+    el.total.textContent = live.length;
+    el.open.textContent = live.length - taken;
     el.taken.textContent = taken;
     el.stats.hidden = false;
   }
@@ -391,7 +399,7 @@
     var fresh = !seenWishes[w.id];
     seenWishes[w.id] = true;
     card.className = "wish" + (w.reserved ? " taken" : "") + (img ? "" : " no-image")
-                   + (fresh ? " reveal" : "");
+                   + (isOff(w) ? " inactive" : "") + (fresh ? " reveal" : "");
 
     if (img) {
       var thumb = document.createElement("img");
@@ -475,6 +483,16 @@
       del.textContent = "Löschen";
       del.addEventListener("click", function () { onDelete(w); });
 
+      var act = document.createElement("button");
+      act.type = "button";
+      act.className = "icon-btn toggle-active";
+      act.textContent = isOff(w) ? "Aktivieren" : "Ausblenden";
+      act.title = isOff(w)
+        ? "Wunsch wieder für Gäste sichtbar machen"
+        : "Wunsch behalten, aber für Gäste ausblenden";
+      act.addEventListener("click", function () { onToggleActive(w); });
+
+      row.appendChild(act);
       row.appendChild(edit);
       row.appendChild(del);
 
@@ -592,6 +610,13 @@
     return form;
   }
 
+  function onToggleActive(w) {
+    if (!admin) return;
+    rpc("set_active", { pw: pw, p_id: w.id, p_value: isOff(w) })
+      .then(function () { lastJson = ""; return load(); })
+      .catch(function (err) { handleAdminError(err, "Umschalten fehlgeschlagen"); });
+  }
+
   function onAdminRelease(w) {
     if (!admin) return;
     if (!window.confirm('Reservierung für "' + w.title + '" ohne das fremde Passwort aufheben?')) return;
@@ -618,8 +643,15 @@
 
   /* ---------- Daten ---------- */
 
+  // Gäste lesen direkt aus der Tabelle – die Policy liefert ihnen nur
+  // aktive Wünsche. Der Admin holt die volle Liste über eine Funktion,
+  // die vorher sein Passwort prüft.
   function load() {
-    return api("wishes?select=*&order=reserved.asc,created_at.desc")
+    var request = admin
+      ? rpc("admin_list_wishes", { pw: pw })
+      : api("wishes?select=*&order=reserved.asc,created_at.desc");
+
+    return request
       .then(function (rows) {
         var json = JSON.stringify(rows);
         wishes = rows || [];
